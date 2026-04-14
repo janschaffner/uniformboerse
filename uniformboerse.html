@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uniformbörse – Schützenverein</title>
+
+  <!-- Firebase -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, getDocs, updateDoc, doc, serverTimestamp, query, orderBy
+    } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // ══════════════════════════════════════════════════
+    //  ⚙️  KONFIGURATION – hier deine eigenen Werte eintragen
+    // ══════════════════════════════════════════════════
+    const FIREBASE_CONFIG = {
+      apiKey:            "DEIN_API_KEY",
+      authDomain:        "DEIN_PROJECT.firebaseapp.com",
+      projectId:         "DEIN_PROJECT_ID",
+      storageBucket:     "DEIN_PROJECT.appspot.com",
+      messagingSenderId: "DEINE_SENDER_ID",
+      appId:             "DEINE_APP_ID"
+    };
+
+    const CLOUDINARY_CLOUD_NAME = "DEIN_CLOUD_NAME";   // z.B. "mein-verein"
+    const CLOUDINARY_UPLOAD_PRESET = "DEIN_PRESET";    // unsigned preset in Cloudinary anlegen
+
+    const VEREIN_PASSWORT = "schuetzen2024";            // ← Vereinspasswort hier ändern
+    // ══════════════════════════════════════════════════
+
+    const app = initializeApp(FIREBASE_CONFIG);
+    const db  = getFirestore(app);
+
+    // ── Hilfsfunktionen ──────────────────────────────
+    async function uploadToCloudinary(file) {
+      const fd = new FormData();
+      fd.append("file", file);
+      fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+        method: "POST", body: fd
+      });
+      const data = await res.json();
+      if (!data.secure_url) throw new Error("Upload fehlgeschlagen");
+      return data.secure_url;
+    }
+
+    async function ladeInserate() {
+      const q = query(collection(db, "inserate"), orderBy("erstellt", "desc"));
+      const snap = await getDocs(q);
+      return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    }
+
+    async function speichereInserat(daten) {
+      return await addDoc(collection(db, "inserate"), { ...daten, erstellt: serverTimestamp(), verkauft: false });
+    }
+
+    async function markiereVerkauft(id) {
+      await updateDoc(doc(db, "inserate", id), { verkauft: true });
+    }
+
+    // ── App-Logik ────────────────────────────────────
+    window.APP = { uploadToCloudinary, ladeInserate, speichereInserat, markiereVerkauft, VEREIN_PASSWORT };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Variablen ─────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #1a3a2a;
+      --green-mid:  #2d5a40;
+      --gold:       #c9a84c;
+      --gold-light: #e8c97a;
+      --cream:      #faf7f0;
+      --parchment:  #f0ead6;
+      --text:       #1a1a18;
+      --muted:      #6b6452;
+      --border:     #d4c9a8;
+      --red:        #8b2020;
+      --radius:     4px;
+      --shadow:     0 2px 16px rgba(26,58,42,.12);
+    }
+
+    body {
+      font-family: "Source Sans 3", sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ──────────────────────────────────────*/
+    header {
+      background: var(--green);
+      color: var(--cream);
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid var(--gold);
+    }
+    .logo {
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .logo-icon {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .logo-text {
+      font-family: "Playfair Display", serif;
+      font-size: 1.15rem;
+      letter-spacing: .02em;
+    }
+    .logo-sub {
+      font-size: .7rem;
+      color: var(--gold-light);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      display: block;
+      line-height: 1;
+    }
+    header nav { display: flex; gap: .5rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      padding: .5rem 1rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: .875rem;
+      font-weight: 600;
+      transition: all .15s;
+      text-decoration: none;
+    }
+    .btn-gold {
+      background: var(--gold); color: var(--green);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn-outline:hover { background: rgba(201,168,76,.15); }
+    .btn-green {
+      background: var(--green-mid); color: var(--cream);
+    }
+    .btn-green:hover { background: var(--green); }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { opacity: .85; }
+    .btn-sm { padding: .35rem .7rem; font-size: .8rem; }
+
+    /* ── Hero / Filter ───────────────────────────────*/
+    .hero {
+      background: linear-gradient(135deg, var(--green) 60%, var(--green-mid));
+      color: var(--cream);
+      padding: 3rem 1.5rem 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: .5rem;
+    }
+    .hero p { color: var(--gold-light); font-size: .95rem; }
+    .hero-divider {
+      width: 60px; height: 3px;
+      background: var(--gold);
+      margin: 1rem auto;
+    }
+
+    .filter-bar {
+      background: var(--parchment);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 1.5rem;
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-bar label { font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .filter-bar select, .filter-bar input[type=text] {
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: var(--radius);
+      padding: .4rem .7rem;
+      font-family: inherit;
+      font-size: .875rem;
+      color: var(--text);
+    }
+    .badge-count {
+      margin-left: auto;
+      background: var(--green);
+      color: var(--gold-light);
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .2rem .6rem;
+      border-radius: 20px;
+    }
+
+    /* ── Grid ────────────────────────────────────────*/
+    main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── Karte ───────────────────────────────────────*/
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(26,58,42,.18); }
+    .card.verkauft { opacity: .55; }
+
+    .card-img {
+      width: 100%; height: 200px;
+      object-fit: cover;
+      background: var(--parchment);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 2rem;
+      cursor: pointer;
+    }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+
+    .img-counter {
+      position: absolute;
+      top: .5rem; right: .5rem;
+      background: rgba(0,0,0,.5);
+      color: #fff;
+      font-size: .72rem;
+      padding: .15rem .45rem;
+      border-radius: 20px;
+    }
+
+    .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: .5rem; }
+    .card-title { font-family: "Playfair Display", serif; font-size: 1.05rem; font-weight: 700; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .tag {
+      background: var(--parchment);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .15rem .5rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .tag-gold { background: #fdf3d8; border-color: var(--gold); color: #7a5c00; }
+    .card-desc { font-size: .85rem; color: var(--muted); line-height: 1.5; flex: 1; }
+    .card-price {
+      font-family: "Playfair Display", serif;
+      font-size: 1.3rem;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .card-footer {
+      padding: .75rem 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+      background: var(--parchment);
+    }
+    .whatsapp-btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: #25d366; color: white;
+      border: none; border-radius: var(--radius);
+      padding: .45rem .85rem;
+      font-size: .8rem; font-weight: 600;
+      cursor: pointer; text-decoration: none;
+      transition: background .15s;
+    }
+    .whatsapp-btn:hover { background: #1ebc59; }
+    .verkauft-badge {
+      position: absolute; top: .75rem; left: .75rem;
+      background: var(--red); color: white;
+      font-size: .7rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: .2rem .6rem; border-radius: 3px;
+    }
+
+    /* ── Leer-State ──────────────────────────────────*/
+    .empty {
+      text-align: center; padding: 4rem 1rem;
+      color: var(--muted);
+    }
+    .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+
+    /* ── Modal Backdrop ──────────────────────────────*/
+    .backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .backdrop.open { display: flex; }
+
+    /* ── Modal ───────────────────────────────────────*/
+    .modal {
+      background: white;
+      border-radius: var(--radius);
+      width: 100%; max-width: 560px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-top: 4px solid var(--gold);
+      box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; background: white; z-index: 1;
+    }
+    .modal-header h2 { font-family: "Playfair Display", serif; font-size: 1.2rem; }
+    .close-btn {
+      background: none; border: none; font-size: 1.3rem;
+      cursor: pointer; color: var(--muted); line-height: 1;
+      padding: .25rem;
+    }
+    .close-btn:hover { color: var(--text); }
+
+    .modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
+
+    .field { display: flex; flex-direction: column; gap: .35rem; }
+    .field label { font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .field input, .field select, .field textarea {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: .55rem .75rem;
+      font-family: inherit;
+      font-size: .9rem;
+      color: var(--text);
+      transition: border-color .15s;
+      background: white;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none;
+      border-color: var(--green-mid);
+    }
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* Zubehör Checkboxen */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: .4rem;
+    }
+    .chk-label {
+      display: flex; align-items: center; gap: .45rem;
+      font-size: .85rem; cursor: pointer;
+      padding: .35rem .5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition: background .12s;
+    }
+    .chk-label:hover { background: var(--parchment); }
+    .chk-label input[type=checkbox]:checked + span { font-weight: 600; color: var(--green); }
+
+    /* Foto-Upload */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      color: var(--muted);
+    }
+    .upload-area:hover, .upload-area.drag { border-color: var(--green-mid); background: var(--parchment); }
+    .upload-area input { display: none; }
+    .upload-previews {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem;
+    }
+    .preview-thumb {
+      width: 70px; height: 70px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .preview-thumb-wrap {
+      position: relative;
+    }
+    .preview-thumb-wrap button {
+      position: absolute; top: -5px; right: -5px;
+      width: 18px; height: 18px;
+      background: var(--red); color: white;
+      border: none; border-radius: 50%;
+      font-size: .65rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Passwort-Screen */
+    .pw-screen {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .pw-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      width: 100%; max-width: 380px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .pw-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .pw-card h2 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: .4rem; }
+    .pw-card p { color: var(--muted); font-size: .875rem; margin-bottom: 1.5rem; }
+    .pw-card input {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: .65rem .9rem;
+      font-size: 1rem;
+      font-family: inherit;
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: .1em;
+    }
+    .pw-card input:focus { outline: none; border-color: var(--green-mid); }
+    .pw-card button { width: 100%; padding: .7rem; font-size: 1rem; }
+    .pw-error { color: var(--red); font-size: .8rem; margin-top: .5rem; }
+
+    /* Foto-Viewer */
+    .photo-viewer {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.9);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-viewer.open { display: flex; }
+    .photo-viewer img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: var(--radius); }
+    .pv-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.15); border: none; color: white; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
+    .pv-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.15); border: none; color: white; font-size: 1.5rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
+    .pv-prev { left: 1rem; }
+    .pv-next { right: 1rem; }
+
+    /* Loader */
+    .spinner {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: var(--gold-light);
+      padding: .75rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600; font-size: .875rem;
+      z-index: 400;
+      opacity: 0; transition: opacity .3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+
+    /* Responsive */
+    @media (max-width: 520px) {
+      .field-row { grid-template-columns: 1fr; }
+      header nav .btn span { display: none; }
+    }
+
+    /* Admin-Marker für "Verkauft"-Button (nur wenn eingeloggt) */
+    .admin-actions { display: flex; gap: .4rem; margin-left: auto; }
+  </style>
+</head>
+<body>
+
+<!-- ══ PASSWORT-SCREEN ══════════════════════════════ -->
+<div id="pwScreen" class="pw-screen">
+  <div class="pw-card">
+    <div class="pw-icon">🎯</div>
+    <h2>Uniformbörse</h2>
+    <p>Bitte gib das Vereinspasswort ein, um Zugang zu erhalten.</p>
+    <input type="password" id="pwInput" placeholder="Passwort" onkeydown="if(event.key==='Enter')checkPw()" />
+    <button class="btn btn-gold" onclick="checkPw()">Zugang erhalten</button>
+    <div class="pw-error" id="pwError"></div>
+  </div>
+</div>
+
+<!-- ══ HAUPT-APP ════════════════════════════════════ -->
+<div id="appRoot" style="display:none">
+
+  <header>
+    <div class="logo">
+      <div class="logo-icon">🎯</div>
+      <div>
+        <span class="logo-text">Uniformbörse</span>
+        <span class="logo-sub">Schützenverein</span>
+      </div>
+    </div>
+    <nav>
+      <button class="btn btn-gold" onclick="openModal()">
+        ＋ <span>Inserat aufgeben</span>
+      </button>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Uniformen & Ausrüstung</h1>
+    <div class="hero-divider"></div>
+    <p>Hier findest du Uniformen von Mitgliedern, die aus der Jugend in die Erwachsenenformation wechseln.</p>
+  </div>
+
+  <div class="filter-bar">
+    <label>Filter:</label>
+    <select id="filterGroesse" onchange="renderInserate()">
+      <option value="">Alle Größen</option>
+      <option>XS</option><option>S</option><option>M</option>
+      <option>L</option><option>XL</option><option>XXL</option>
+    </select>
+    <input type="text" id="filterText" placeholder="Suche…" oninput="renderInserate()" style="width:160px"/>
+    <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.8rem">
+      <input type="checkbox" id="filterVerfuegbar" onchange="renderInserate()" checked />
+      Nur verfügbare
+    </label>
+    <span class="badge-count" id="countBadge">0 Inserate</span>
+  </div>
+
+  <main>
+    <div class="grid" id="inserateGrid"></div>
+    <div class="empty" id="emptyState" style="display:none">
+      <div class="empty-icon">🔍</div>
+      <p>Keine Inserate gefunden.</p>
+    </div>
+  </main>
+</div>
+
+<!-- ══ MODAL: INSERAT AUFGEBEN ════════════════════════ -->
+<div class="backdrop" id="modalBackdrop" onclick="closeOnBackdrop(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h2>Inserat aufgeben</h2>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="field">
+        <label>Titel *</label>
+        <input type="text" id="fTitel" placeholder="z.B. Sakko dunkelgrün inkl. Hose" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Größe (Sakko) *</label>
+          <select id="fGroesse">
+            <option value="">– bitte wählen –</option>
+            <option>XS</option><option>S</option><option>M</option>
+            <option>L</option><option>XL</option><option>XXL</option>
+            <option>Andere</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Preis (€) *</label>
+          <input type="number" id="fPreis" placeholder="z.B. 80" min="0" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Zustand</label>
+        <select id="fZustand">
+          <option>Wie neu</option>
+          <option>Gut erhalten</option>
+          <option>Gebrauchsspuren</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Enthaltenes Zubehör</label>
+        <div class="checkbox-grid" id="zubehoerGrid"></div>
+      </div>
+
+      <div class="field">
+        <label>Beschreibung</label>
+        <textarea id="fBeschreibung" placeholder="Weitere Details, Besonderheiten, Passform-Hinweise…"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Fotos *</label>
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('fotoInput').click()"
+             ondragover="event.preventDefault();this.classList.add('drag')"
+             ondragleave="this.classList.remove('drag')"
+             ondrop="handleDrop(event)">
+          <input type="file" id="fotoInput" multiple accept="image/*" onchange="handleFiles(this.files)" />
+          📷 Klicken oder Fotos hierher ziehen<br/>
+          <small style="color:var(--muted)">JPG, PNG – mehrere möglich</small>
+        </div>
+        <div class="upload-previews" id="uploadPreviews"></div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Name *</label>
+          <input type="text" id="fName" placeholder="Vorname Nachname" />
+        </div>
+        <div class="field">
+          <label>WhatsApp-Nummer *</label>
+          <input type="tel" id="fTelefon" placeholder="+49 151 12345678" />
+        </div>
+      </div>
+
+      <button class="btn btn-gold" id="submitBtn" onclick="submitInserat()" style="width:100%;padding:.75rem;font-size:1rem;justify-content:center">
+        Inserat veröffentlichen
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOTO-VIEWER ════════════════════════════════════ -->
+<div class="photo-viewer" id="photoViewer">
+  <button class="pv-close" onclick="closeViewer()">✕</button>
+  <button class="pv-nav pv-prev" onclick="viewerNav(-1)">‹</button>
+  <img id="viewerImg" src="" alt="" />
+  <button class="pv-nav pv-next" onclick="viewerNav(1)">›</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Zustand ─────────────────────────────────────────
+let alleInserate = [];
+let fotoFiles    = [];
+let fotoUrls     = [];
+let viewerPhotos = [];
+let viewerIdx    = 0;
+
+const ZUBEHOER_LISTE = [
+  "Hose", "Hemd", "Krawatte", "Mütze", "Gürtel",
+  "Schuhe", "Epauletten", "Abzeichen", "Handschuhe", "Strümpfe"
+];
+
+// ── Passwort ─────────────────────────────────────────
+function checkPw() {
+  const val = document.getElementById("pwInput").value;
+  if (val === window.APP?.VEREIN_PASSWORT) {
+    document.getElementById("pwScreen").style.display = "none";
+    document.getElementById("appRoot").style.display  = "block";
+    initApp();
+  } else {
+    document.getElementById("pwError").textContent = "Falsches Passwort. Bitte nochmal versuchen.";
+  }
+}
+
+// ── Init ─────────────────────────────────────────────
+async function initApp() {
+  buildZubehoer();
+  await ladeDaten();
+}
+
+function buildZubehoer() {
+  const grid = document.getElementById("zubehoerGrid");
+  grid.innerHTML = ZUBEHOER_LISTE.map(z => `
+    <label class="chk-label">
+      <input type="checkbox" value="${z}" />
+      <span>${z}</span>
+    </label>
+  `).join("");
+}
+
+async function ladeDaten() {
+  try {
+    alleInserate = await window.APP.ladeInserate();
+    renderInserate();
+  } catch(e) {
+    console.error(e);
+    showToast("⚠️ Fehler beim Laden – Firebase konfiguriert?");
+  }
+}
+
+// ── Render ───────────────────────────────────────────
+function renderInserate() {
+  const groesse   = document.getElementById("filterGroesse").value;
+  const text      = document.getElementById("filterText").value.toLowerCase();
+  const nurVerfug = document.getElementById("filterVerfuegbar").checked;
+
+  let filtered = alleInserate.filter(i => {
+    if (nurVerfug && i.verkauft) return false;
+    if (groesse && i.groesse !== groesse) return false;
+    if (text && !`${i.titel} ${i.beschreibung}`.toLowerCase().includes(text)) return false;
+    return true;
+  });
+
+  document.getElementById("countBadge").textContent = `${filtered.length} Inserat${filtered.length!==1?"e":""}`;
+
+  const grid = document.getElementById("inserateGrid");
+  const empty = document.getElementById("emptyState");
+
+  if (!filtered.length) {
+    grid.innerHTML = ""; empty.style.display = "block"; return;
+  }
+  empty.style.display = "none";
+
+  grid.innerHTML = filtered.map(i => {
+    const fotos   = i.fotos || [];
+    const zubehoer = (i.zubehoer || []).join(", ");
+    const waLink = `https://wa.me/${i.telefon.replace(/\D/g,"")}?text=${encodeURIComponent("Hallo "+i.name+", ich interessiere mich für dein Inserat: "+i.titel)}`;
+
+    return `
+      <div class="card ${i.verkauft?'verkauft':''}">
+        ${i.verkauft ? '<div class="verkauft-badge">Verkauft</div>' : ''}
+        <div class="card-img" onclick="openViewer(${JSON.stringify(fotos)}, 0)">
+          ${fotos.length
+            ? `<img src="${fotos[0]}" alt="${i.titel}" loading="lazy" />`
+            : '📷'}
+          ${fotos.length>1 ? `<div class="img-counter">1 / ${fotos.length}</div>` : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-title">${i.titel}</div>
+          <div class="card-meta">
+            <span class="tag">Größe ${i.groesse}</span>
+            <span class="tag">${i.zustand}</span>
+            ${zubehoer ? `<span class="tag tag-gold">inkl. ${zubehoer}</span>` : ''}
+          </div>
+          ${i.beschreibung ? `<div class="card-desc">${i.beschreibung}</div>` : ''}
+          <div class="card-price">${Number(i.preis).toFixed(2).replace('.',',')} €</div>
+        </div>
+        <div class="card-footer">
+          <a class="whatsapp-btn" href="${waLink}" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.08L0 24l6.1-1.6A11.97 11.97 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.23-3.48-8.52ZM12 22a9.94 9.94 0 0 1-5.08-1.38l-.36-.22-3.76.99 1-3.65-.24-.38A9.95 9.95 0 0 1 2 12C2 6.49 6.49 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.94 9.94 0 0 1 22 12c0 5.51-4.49 10-10 10Zm5.44-7.47c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.07 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>
+            WhatsApp
+          </a>
+          <small style="color:var(--muted);font-size:.75rem">${i.name}</small>
+          ${!i.verkauft ? `<div class="admin-actions"><button class="btn btn-sm btn-red" onclick="markVerkauft('${i.id}')">Verkauft</button></div>` : ''}
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+// ── Foto-Upload ───────────────────────────────────────
+function handleFiles(files) {
+  for (const f of files) {
+    fotoFiles.push(f);
+    const url = URL.createObjectURL(f);
+    fotoUrls.push(url);
+  }
+  renderPreviews();
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById("uploadArea").classList.remove("drag");
+  handleFiles(e.dataTransfer.files);
+}
+function renderPreviews() {
+  document.getElementById("uploadPreviews").innerHTML = fotoUrls.map((u,i) => `
+    <div class="preview-thumb-wrap">
+      <img class="preview-thumb" src="${u}" />
+      <button onclick="removeFoto(${i})">✕</button>
+    </div>
+  `).join("");
+}
+function removeFoto(idx) {
+  fotoFiles.splice(idx, 1);
+  fotoUrls.splice(idx, 1);
+  renderPreviews();
+}
+
+// ── Submit ────────────────────────────────────────────
+async function submitInserat() {
+  const titel     = document.getElementById("fTitel").value.trim();
+  const groesse   = document.getElementById("fGroesse").value;
+  const preis     = document.getElementById("fPreis").value;
+  const zustand   = document.getElementById("fZustand").value;
+  const beschr    = document.getElementById("fBeschreibung").value.trim();
+  const name      = document.getElementById("fName").value.trim();
+  const telefon   = document.getElementById("fTelefon").value.trim();
+  const zubehoer  = [...document.querySelectorAll("#zubehoerGrid input:checked")].map(c=>c.value);
+
+  if (!titel||!groesse||!preis||!name||!telefon) {
+    showToast("⚠️ Bitte alle Pflichtfelder ausfüllen"); return;
+  }
+  if (!fotoFiles.length) {
+    showToast("⚠️ Bitte mindestens ein Foto hochladen"); return;
+  }
+
+  const btn = document.getElementById("submitBtn");
+  btn.innerHTML = '<span class="spinner"></span> Wird hochgeladen…';
+  btn.disabled  = true;
+
+  try {
+    const uploadedUrls = [];
+    for (const f of fotoFiles) {
+      const url = await window.APP.uploadToCloudinary(f);
+      uploadedUrls.push(url);
+    }
+
+    await window.APP.speichereInserat({
+      titel, groesse, preis: Number(preis), zustand,
+      beschreibung: beschr, name, telefon, zubehoer,
+      fotos: uploadedUrls
+    });
+
+    showToast("✅ Inserat erfolgreich veröffentlicht!");
+    closeModal();
+    resetForm();
+    await ladeDaten();
+  } catch(e) {
+    console.error(e);
+    showToast("❌ Fehler: " + e.message);
+  } finally {
+    btn.innerHTML = "Inserat veröffentlichen";
+    btn.disabled  = false;
+  }
+}
+
+async function markVerkauft(id) {
+  if (!confirm("Inserat als 'Verkauft' markieren?")) return;
+  try {
+    await window.APP.markiereVerkauft(id);
+    showToast("✅ Als verkauft markiert");
+    await ladeDaten();
+  } catch(e) { showToast("❌ " + e.message); }
+}
+
+// ── Modal ─────────────────────────────────────────────
+function openModal() { document.getElementById("modalBackdrop").classList.add("open"); }
+function closeModal() { document.getElementById("modalBackdrop").classList.remove("open"); }
+function closeOnBackdrop(e) { if(e.target===e.currentTarget) closeModal(); }
+function resetForm() {
+  ["fTitel","fGroesse","fPreis","fBeschreibung","fName","fTelefon"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value="";
+  });
+  document.getElementById("fZustand").selectedIndex=0;
+  document.querySelectorAll("#zubehoerGrid input").forEach(c=>c.checked=false);
+  fotoFiles=[]; fotoUrls=[];
+  document.getElementById("uploadPreviews").innerHTML="";
+}
+
+// ── Foto-Viewer ───────────────────────────────────────
+function openViewer(fotos, idx) {
+  if(!fotos.length) return;
+  viewerPhotos = fotos;
+  viewerIdx    = idx;
+  document.getElementById("viewerImg").src = fotos[idx];
+  document.getElementById("photoViewer").classList.add("open");
+}
+function closeViewer() { document.getElementById("photoViewer").classList.remove("open"); }
+function viewerNav(dir) {
+  viewerIdx = (viewerIdx + dir + viewerPhotos.length) % viewerPhotos.length;
+  document.getElementById("viewerImg").src = viewerPhotos[viewerIdx];
+}
+document.getElementById("photoViewer").addEventListener("click", e => {
+  if(e.target===e.currentTarget) closeViewer();
+});
+
+// ── Toast ─────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 3000);
+}
+
+// Escape-Taste
+document.addEventListener("keydown", e => {
+  if(e.key==="Escape") { closeModal(); closeViewer(); }
+});
+</script>
+</body>
+</html>
