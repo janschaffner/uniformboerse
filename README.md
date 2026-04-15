@@ -94,3 +94,34 @@ cp .env.example .env
 # .env mit eigenen Werten befüllen
 netlify dev
 ```
+
+npx netlify dev
+
+Bis P5 erledigt
+
+Phase 5: Die Website live schalten (Netlify)
+Jetzt verknüpfen wir dein GitHub-Repository mit Netlify. Netlify lädt deinen Code herunter, baut den Server auf und macht die Seite für alle erreichbar.
+
+Erstelle einen kostenlosen Account auf netlify.com (am einfachsten loggst du dich direkt mit "GitHub" ein).
+
+Klicke im Dashboard auf Add new site -> Import an existing project.
+
+Wähle GitHub aus und erlaube Netlify den Zugriff auf deine Repositories. Wähle dein uniformboerse Repository aus.
+
+Du kommst auf eine Einstellungsseite. Scrolle nach ganz unten, klicke aber NOCH NICHT auf Deploy!
+
+Klicke stattdessen auf Add environment variables (oder suche in den Site Settings nach Environment Variables).
+
+Jetzt fügst du vier Variablen hinzu. Die Werte für Firebase findest du in der .json Datei aus Phase 1 (öffne sie einfach mit einem Texteditor auf deinem PC, um die Werte herauszukopieren):
+
+Key: VEREIN_PASSWORT | Value: schuetzen2024 (oder was immer du willst)
+
+Key: FIREBASE_PROJECT_ID | Value: (steht in der JSON bei project_id)
+
+Key: FIREBASE_CLIENT_EMAIL | Value: (steht in der JSON bei client_email)
+
+Key: FIREBASE_PRIVATE_KEY | Value: (steht in der JSON bei private_key. Kopiere hier den KOMPLETTEN Block inkl. -----BEGIN PRIVATE KEY----- und -----END PRIVATE KEY-----)
+
+Wenn alle 4 Variablen drin sind, klicke auf Deploy site.
+
+🎉 Fertig! Netlify baut jetzt deine Seite. Nach etwa einer Minute bekommst du einen grünen Link (endet meist auf .netlify.app). Das ist deine fertige, absolut sichere Website!

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Uniformbörse – Schützenverein</title>
+  <title>Uniformbörse – Hubertus-Schützengilde Ennigerloh e.V.</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,6 +42,8 @@
     .btn-green:hover { background: var(--green); }
     .btn-red    { background: var(--red); color: #fff; }
     .btn-red:hover { opacity: .85; }
+    .btn-loeschen { background: #444; color: #fff; }
+    .btn-loeschen:hover { background: #222; }
     .btn-sm     { padding: .35rem .7rem; font-size: .8rem; }
     .btn:disabled { opacity: .6; cursor: not-allowed; }
 
@@ -56,7 +58,8 @@
       padding: 2.5rem 2rem; width: 100%; max-width: 380px;
       text-align: center; box-shadow: var(--shadow);
     }
-    .pw-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .pw-icon { margin-bottom: 1.25rem; }
+    .pw-icon img { max-width: 220px; height: auto; }
     .pw-card h2 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: .4rem; }
     .pw-card p  { color: var(--muted); font-size: .875rem; margin-bottom: 1.5rem; }
     .pw-card input {
@@ -75,13 +78,8 @@
       height: 64px; position: sticky; top: 0; z-index: 100;
       border-bottom: 3px solid var(--gold);
     }
-    .logo { display: flex; align-items: center; gap: .75rem; }
-    .logo-icon {
-      width: 36px; height: 36px; background: var(--gold); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
-    }
-    .logo-text { font-family: "Playfair Display", serif; font-size: 1.15rem; letter-spacing: .02em; }
-    .logo-sub  { font-size: .7rem; color: var(--gold-light); letter-spacing: .1em; text-transform: uppercase; display: block; line-height: 1; }
+    .logo { display: flex; align-items: center; }
+    .logo img { height: 44px; width: auto; filter: brightness(0) invert(1); }
 
     /* ── Hero ── */
     .hero {
@@ -269,7 +267,7 @@
 <!-- ══ PASSWORT-SCREEN ══ -->
 <div id="pwScreen" class="pw-screen">
   <div class="pw-card">
-    <div class="pw-icon">🎯</div>
+    <div class="pw-icon"><img src="gildelogo.png" alt="Hubertus-Schützengilde Ennigerloh e.V." /></div>
     <h2>Uniformbörse</h2>
     <p>Bitte gib das Vereinspasswort ein, um Zugang zu erhalten.</p>
     <input type="password" id="pwInput" placeholder="Passwort"
@@ -284,12 +282,8 @@
 
   <header>
     <div class="logo">
-      <div class="logo-icon">🎯</div>
-      <div>
-        <span class="logo-text">Uniformbörse</span>
-        <span class="logo-sub">Schützenverein</span>
+        <img src="gildelogo.png" alt="Hubertus-Schützengilde Ennigerloh e.V." />
       </div>
-    </div>
     <nav>
       <button class="btn btn-gold" onclick="openModal()">
         ＋ <span>Inserat aufgeben</span>
@@ -300,7 +294,7 @@
   <div class="hero">
     <h1>Uniformen & Ausrüstung</h1>
     <div class="hero-divider"></div>
-    <p>Uniformen von Mitgliedern, die aus der Jugend in die Erwachsenenformation wechseln.</p>
+    <p>Uniformen von Mitgliedern der Hubertus-Schützengilde Ennigerloh e.V., die aus der Jugend in die Erwachsenenformation wechseln.</p>
   </div>
 
   <div class="filter-bar">
@@ -450,15 +444,11 @@ async function checkPw() {
   btn.disabled  = true;
   err.textContent = "";
 
-  // Wir prüfen das Passwort, indem wir versuchen ein Inserat abzurufen.
-  // Die Function gibt 401 zurück wenn das Passwort falsch ist.
   try {
-    const res = await fetch("/.netlify/functions/telefon-abrufen", {
+    const res = await fetch("/.netlify/functions/passwort-pruefen", {
       method: "POST",
-      body: JSON.stringify({ passwort: pw, id: "__ping__" })
+      body: JSON.stringify({ passwort: pw })
     });
-    // 404 = falsches Passwort kam durch (Inserat nicht gefunden = PW ok)
-    // 401 = falsches Passwort
     if (res.status === 401) {
       err.textContent = "Falsches Passwort. Bitte nochmal versuchen.";
     } else {
@@ -551,11 +541,10 @@ function renderInserate() {
             </button>
             <small style="color:var(--muted);font-size:.75rem">${i.name}</small>
           </div>
-          ${!i.verkauft
-            ? `<div class="admin-actions">
-                 <button class="btn btn-sm btn-red" onclick="markVerkauft('${i.id}')">Verkauft</button>
-               </div>`
-            : ''}
+          <div class="admin-actions">
+            ${!i.verkauft ? `<button class="btn btn-sm btn-red" onclick="markVerkauft('${i.id}')">Verkauft</button>` : ''}
+            <button class="btn btn-sm btn-loeschen" onclick="loescheInserat('${i.id}')">🗑</button>
+          </div>
         </div>
       </div>`;
   }).join("");
@@ -692,6 +681,19 @@ async function markVerkauft(id) {
   } catch(e) { showToast("❌ " + e.message); }
 }
 
+async function loescheInserat(id) {
+  if (!confirm("Inserat endgültig löschen? Das kann nicht rückgängig gemacht werden.")) return;
+  try {
+    const res = await fetch("/.netlify/functions/inserat-loeschen", {
+      method: "POST",
+      body: JSON.stringify({ passwort: sessionPasswort, id })
+    });
+    if (!res.ok) throw new Error("Serverfehler");
+    showToast("🗑 Inserat gelöscht");
+    await ladeDaten();
+  } catch(e) { showToast("❌ " + e.message); }
+}
+
 // ── Modal ─────────────────────────────────────────────
 function openModal()  { document.getElementById("modalBackdrop").classList.add("open"); }
 function closeModal() { document.getElementById("modalBackdrop").classList.remove("open"); }
@@ -744,8 +746,8 @@ document.addEventListener("keydown",e=>{
   Diese sind bewusst public – Cloudinary Upload Presets sind dafür designed.
   Begrenze den Preset in der Cloudinary-Console auf max. Dateigröße und einen Ordner.
 -->
-<meta name="cn" content="dc3cgunve" />
-<meta name="cp" content="ym6yy11s" />
+<meta name="cn" content="DEIN_CLOUDINARY_CLOUD_NAME" />
+<meta name="cp" content="DEIN_CLOUDINARY_UPLOAD_PRESET" />
 
 </body>
 </html>
