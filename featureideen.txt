@@ -2,6 +2,31 @@ nur sakko und hosen
 sakkos in sakko größen
 hosen in hosengrößen, dropdown hier wenn haken gesetzt wird
 max 10 bilder pro inserat
-warum so viele bilder in cloudly
-filter damen und herren
-damen haben das tuch und bluse
+Bug? warum so viele bilder in cloudly
+filter damen und herren uniformen
+damen haben ein grünes tuch und einen blazer mit jungschützen oder ehrengarden patch
+
+
+damen tuch so wie die hosen bei den männern - optional
+damen auch hosen wie bei den männern
+--> das soll gleich aussehen wie bei den herren
+die damen haben auch nur blazer tuch und hose wie die männer, keine weitere ausrüstung
+herren auch jungschützen oder ehrengarde checkboxen
+Filter Damen Herren geht nicht --> beim inserieren soll der tab damen oder herren den filter ermöglichen--> flag setzen?
+in der kachel des inserates soll sichtbar sein, dass es eine damen oder herren anzeige ist--> auch via der flag?
+löschen der anzeige soll auch die fotos aus cloudly endgültig löschen
+das suchfeld kann ganz weg. 
+stattdessen einen filter nach größen die grade angeboten werden - für sakkos und blazer und für hosen. die filterwerte kommen aus den anzeigen selber. datenbankaufruf?
+
+Schriftzug ändern: Uniformen von Mitgliedern der Hubertus-Schützengilde Ennigerloh e.V., die aus der Jugend in die Erwachsenenformation wechseln.
+in
+Hier könnne gebrauchte Uniformen der Hubertus-Schützengilde Ennigerloh e.V. angeboten und erworben werden. Kontaktaufnahme zu den Verkäufern via WhatsApp. Alle Preise sind Verhandlungsbasis und werden zwischen dem Käufer und Verkäufer festgelegt.
+
+Überschrift ändern: Uniformen & Ausrüstung
+in
+Uniformbörse
+
+Unten eine grüne Leiste einfügen mit Text in der gleichen farbe wie in der überschrift. Der text soll ein rechtlicher disclaimer sein. verbessere ihn bei bedarft. Vorschlag:
+Die Uniformbörse ist kein offizielles Portal der Hubertus-Schützengilde Ennigerloh e.V. Die Hubertus-Schützengilde Ennigerloh e.V. oder der Betreiber der Uniformbörse können und werden keinerlei Haftung für mögliche Fehler oder Datenmissbrauch übernehmen. Die Angabe von personenbezogenen Daten ist freiwillig.
+
+Logo ändern in das Börse Logo um die Gilden Logos wegzulassen da keine erlaubnis zur nutzung
