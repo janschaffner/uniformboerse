@@ -1,3 +1,4 @@
+V1
 nur sakko und hosen 
 sakkos in sakko größen
 hosen in hosengrößen, dropdown hier wenn haken gesetzt wird
@@ -6,7 +7,7 @@ Bug? warum so viele bilder in cloudly
 filter damen und herren uniformen
 damen haben ein grünes tuch und einen blazer mit jungschützen oder ehrengarden patch
 
-
+V2
 damen tuch so wie die hosen bei den männern - optional
 damen auch hosen wie bei den männern
 --> das soll gleich aussehen wie bei den herren
@@ -17,16 +18,40 @@ in der kachel des inserates soll sichtbar sein, dass es eine damen oder herren a
 löschen der anzeige soll auch die fotos aus cloudly endgültig löschen
 das suchfeld kann ganz weg. 
 stattdessen einen filter nach größen die grade angeboten werden - für sakkos und blazer und für hosen. die filterwerte kommen aus den anzeigen selber. datenbankaufruf?
-
 Schriftzug ändern: Uniformen von Mitgliedern der Hubertus-Schützengilde Ennigerloh e.V., die aus der Jugend in die Erwachsenenformation wechseln.
 in
 Hier könnne gebrauchte Uniformen der Hubertus-Schützengilde Ennigerloh e.V. angeboten und erworben werden. Kontaktaufnahme zu den Verkäufern via WhatsApp. Alle Preise sind Verhandlungsbasis und werden zwischen dem Käufer und Verkäufer festgelegt.
-
 Überschrift ändern: Uniformen & Ausrüstung
 in
 Uniformbörse
-
 Unten eine grüne Leiste einfügen mit Text in der gleichen farbe wie in der überschrift. Der text soll ein rechtlicher disclaimer sein. verbessere ihn bei bedarft. Vorschlag:
 Die Uniformbörse ist kein offizielles Portal der Hubertus-Schützengilde Ennigerloh e.V. Die Hubertus-Schützengilde Ennigerloh e.V. oder der Betreiber der Uniformbörse können und werden keinerlei Haftung für mögliche Fehler oder Datenmissbrauch übernehmen. Die Angabe von personenbezogenen Daten ist freiwillig.
-
 Logo ändern in das Börse Logo um die Gilden Logos wegzulassen da keine erlaubnis zur nutzung
+
+V3:
+neue Zustände:
+Neu
+Sehr Gut
+Gut
+Zufriedenstellend
+
+Ehrengarde anstatt Ehrengarden
+
+Die Filter funktionieren nicht. 
+können wir die filterwerte aus den freitextfeldern übernehmen? zB man gibt beim Sakko Größe 48 ein und dieser Wert 48 steht dann im Filter. Das selbe bei Hosen.
+
+Der Inserat Name zB [Ehrengarden] Sakko Gr. 48 + 2 Hosen soll ausssagekräftiger sein. Wenn eine Hose vorhanden ist, dann sollen die Hosen in einer neun Zeile darunter stehen und es soll die größe daneben stehen.
+Wenn 2 Hosen dabei sind, soll in Klammern hinter Hosen die Größen aufgelistet stehen zB 2 Hosen (W32/W32, W32/L30)
+
+Ebenfalls soll pro Hose oder Tuch auch der Preis unten stehen. Einmal der Preis pro Sakko/Blazer, dann der Preis für ein Tuch (bei Damen) und dann der Preis pro hose und eine Summe
+Wir müssen hier auch die json anpassen, da der preis einer hose anscheinend nicht in die DB geschrieben wird
+
+Die Tabs Alle Herren Damen funktioniert nicht. Ggf müssen wir die Datenbank Json anpassen und pro Inserat einen Eintrag "art" = Herren oder Damen machen. danach sollen wir dann filtern können in den Tabs.
+
+Das Herren/Damen-Label direkt auf dem Foto oben links scheint nicht zu funktionieren, Wenn ich Damen beim inserieren auswähle, dann wird es trotzdem als herren eingetragen. Hier macht vllt halt ehrlic der json anpassung sinn
+
+Das array Zubehoer scheint auch nicht korrekt in der db gefüllt zu werden. das ist immer leer
+
+V4
+Wenn ein Inserat als "verkauft" markiert ist, sollen auch dessen Filterwerte aus dem Filter verschwinden. Aktuell bleiben die Filterwerte drin, das macht aber keinen Sinn, da man das Inserat ja nicht mehr kaufen kann
+Unten Rechts soll ein Button "Bug melden" 

@@ -15,45 +15,49 @@ function getDb() {
 }
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
+  if (event.httpMethod !== "POST")
     return { statusCode: 405, body: "Method Not Allowed" };
-  }
 
   let body;
-  try {
-    body = JSON.parse(event.body);
-  } catch {
-    return { statusCode: 400, body: JSON.stringify({ error: "Ungültige Anfrage" }) };
-  }
+  try { body = JSON.parse(event.body); }
+  catch { return { statusCode: 400, body: JSON.stringify({ error: "Ungültige Anfrage" }) }; }
 
-  const { passwort, titel, groesse, preis, zustand, beschreibung,
-          zubehoer, fotos, name, telefon } = body;
-
-  // Passwort prüfen
-  if (!passwort || passwort !== process.env.VEREIN_PASSWORT) {
+  const { passwort } = body;
+  if (!passwort || passwort !== process.env.VEREIN_PASSWORT)
     return { statusCode: 401, body: JSON.stringify({ error: "Falsches Passwort" }) };
-  }
 
   // Pflichtfelder
-  if (!titel || !groesse || !preis || !name || !telefon || !fotos?.length) {
+  const { art, patch, zustand, beschreibung, name, telefon, fotos } = body;
+  if (!art || !patch || !name || !telefon || !fotos?.length)
     return { statusCode: 400, body: JSON.stringify({ error: "Pflichtfelder fehlen" }) };
-  }
+
+  // art-spezifische Felder
+  // sakko: { groesse, preis } | null
+  // blazer: { groesse, preis } | null
+  // tuch: { preis } | null
+  // hosen: [{ groesse, preis }] – Herren
+  // damenHosen: [{ groesse, preis }] – Damen
+  const { sakko, blazer, tuch, hosen, damenHosen } = body;
 
   try {
     const db  = getDb();
     const ref = await db.collection("inserate").add({
-      titel, groesse, preis: Number(preis), zustand,
+      art,           // "herren" | "damen"
+      patch,         // "Jungschützen" | "Ehrengarde"
+      sakko:      sakko      || null,
+      blazer:     blazer     || null,
+      tuch:       tuch       || null,
+      hosen:      hosen      || [],
+      damenHosen: damenHosen || [],
+      zustand,
       beschreibung: beschreibung || "",
-      zubehoer: zubehoer || [],
-      fotos, name, telefon,
+      name,
+      telefon,
+      fotos,
       verkauft: false,
       erstellt: FieldValue.serverTimestamp(),
     });
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ id: ref.id }),
-    };
+    return { statusCode: 200, body: JSON.stringify({ id: ref.id }) };
   } catch (err) {
     console.error(err);
     return { statusCode: 500, body: JSON.stringify({ error: "Serverfehler" }) };

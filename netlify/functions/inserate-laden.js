@@ -23,15 +23,18 @@ exports.handler = async () => {
       const d = doc.data();
       return {
         id:          doc.id,
-        titel:       d.titel,
-        groesse:     d.groesse,
-        preis:       d.preis,
-        zustand:     d.zustand,
-        beschreibung: d.beschreibung,
-        zubehoer:    d.zubehoer,
-        fotos:       d.fotos,
-        name:        d.name,
-        verkauft:    d.verkauft,
+        art:         d.art         || "herren",
+        patch:       d.patch       || "",
+        sakko:       d.sakko       || null,
+        blazer:      d.blazer      || null,
+        tuch:        d.tuch        || null,
+        hosen:       d.hosen       || [],
+        damenHosen:  d.damenHosen  || [],
+        zustand:     d.zustand     || "",
+        beschreibung: d.beschreibung || "",
+        name:        d.name        || "",
+        fotos:       d.fotos       || [],
+        verkauft:    d.verkauft    || false,
         erstellt:    d.erstellt?.toMillis?.() ?? null,
         // telefon wird bewusst NICHT zurückgegeben
       };
