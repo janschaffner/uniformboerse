@@ -266,54 +266,7 @@
 
   <footer>
     <p class="footer-text">Die Uniformbörse ist kein offizielles Angebot der Hubertus-Schützengilde Ennigerloh e.V. Der Betreiber übernimmt keine Haftung für die Richtigkeit der Angaben, Schäden aus Vertragsabschlüssen oder den Missbrauch personenbezogener Daten. Die Angabe personenbezogener Daten erfolgt freiwillig und auf eigene Verantwortung. Käufer und Verkäufer handeln eigenständig und auf eigenes Risiko.</p>
-    <div style="margin-top:.75rem">
-      <button onclick="zeigeImpressum()" style="background:none;border:none;color:var(--gold-light);font-family:inherit;font-size:.75rem;cursor:pointer;text-decoration:underline;opacity:.7;">Impressum</button>
-    </div>
   </footer>
-
-  <!-- Bug-Button -->
-  <div id="bugBtn" style="display:none;position:fixed;bottom:1.5rem;right:1.5rem;z-index:150;">
-    <button onclick="meldeBug()" title="Bug melden" style="background:var(--green);border:2px solid var(--gold);border-radius:50%;width:52px;height:52px;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.3);transition:transform .15s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
-      <img src="bug.png" alt="Bug melden" style="width:30px;height:30px;object-fit:contain;"/>
-    </button>
-  </div>
-
-  <!-- Impressum Overlay -->
-  <div id="impressumBackdrop" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:250;align-items:center;justify-content:center;padding:1rem;" onclick="if(event.target===this)this.style.display='none'">
-    <div style="background:white;border-radius:4px;border-top:4px solid var(--gold);max-width:520px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3);">
-      <div style="padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:white;">
-        <h2 style="font-family:'Playfair Display',serif;font-size:1.2rem;">Impressum</h2>
-        <button onclick="document.getElementById('impressumBackdrop').style.display='none'" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--muted);">✕</button>
-      </div>
-      <div style="padding:1.5rem;display:flex;flex-direction:column;gap:1.25rem;font-size:.875rem;line-height:1.6;color:var(--text);">
-        <div>
-          <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Angaben gemäß § 5 TMG</strong>
-          <p style="margin-top:.4rem;">Jan Schaffner<br/>Grüner Grund 44<br/>48151 Münster</p>
-        </div>
-        <div>
-          <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Kontakt</strong>
-          <p style="margin-top:.4rem;">Kontaktaufnahme ausschließlich über das auf dieser Plattform bereitgestellte Bug-Meldeformular.</p>
-        </div>
-        <div>
-          <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Haftungsausschluss</strong>
-          <p style="margin-top:.4rem;">Die Uniformbörse ist eine private, nicht-kommerzielle Plattform und kein offizielles Angebot der Hubertus-Schützengilde Ennigerloh e.V. Der Betreiber übernimmt keine Haftung für die Vollständigkeit, Richtigkeit oder Aktualität der eingestellten Inhalte. Für den Inhalt der Inserate sind ausschließlich die jeweiligen Inserenten verantwortlich.</p>
-        </div>
-        <div>
-          <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Vertragsabschlüsse</strong>
-          <p style="margin-top:.4rem;">Kaufverträge kommen ausschließlich zwischen Käufer und Verkäufer zustande. Der Betreiber ist nicht Partei dieser Verträge und übernimmt keine Haftung für deren Erfüllung, Mängel oder sonstige Ansprüche aus dem Kauf.</p>
-        </div>
-        <div>
-          <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Datenschutz</strong>
-          <p style="margin-top:.4rem;">Personenbezogene Daten (Name, Telefonnummer) werden ausschließlich zum Zweck der Kontaktaufnahme zwischen Käufer und Verkäufer gespeichert. Die Angabe erfolgt freiwillig. Daten werden nicht an Dritte weitergegeben und können jederzeit auf Anfrage gelöscht werden.</p>
-        </div>
-        <div>
-          <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Urheberrecht</strong>
-          <p style="margin-top:.4rem;">Die durch den Betreiber erstellten Inhalte und Werke auf dieser Plattform unterliegen dem deutschen Urheberrecht. Die hochgeladenen Fotos und Texte der Inserate verbleiben im Eigentum der jeweiligen Inserenten.</p>
-        </div>
-        <p style="font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);padding-top:1rem;">Stand: April 2026 · Dieser Impressumsentwurf ersetzt keine Rechtsberatung.</p>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- ══ MODAL ══ -->
@@ -369,10 +322,7 @@ async function checkPw() {
 // ════════════════════════════════════════════
 // INIT & DATEN
 // ════════════════════════════════════════════
-async function initApp() {
-  document.getElementById("bugBtn").style.display = "block";
-  await ladeDaten();
-}
+async function initApp() { await ladeDaten(); }
 
 async function ladeDaten() {
   try {
@@ -409,20 +359,16 @@ function aktualisiereFilter() {
 
   const sakkoGr = new Set(), hoseGr = new Set();
   alleInserate
-    .filter(i => !i.verkauft) // verkaufte Inserate IMMER aus Filterwerten raus
     .filter(i => aktiverTab === "alle" || i.art === aktiverTab)
+    .filter(i => !i.verkauft || !document.getElementById("filterVerfuegbar").checked)
     .forEach(i => {
       if (i.sakko?.groesse)  sakkoGr.add(i.sakko.groesse.trim());
       if (i.blazer?.groesse) sakkoGr.add(i.blazer.groesse.trim());
       [...(i.hosen||[]), ...(i.damenHosen||[])].forEach(h => { if (h.groesse) hoseGr.add(h.groesse.trim()); });
     });
 
-  // Wenn gewählter Wert nicht mehr verfügbar → zurücksetzen
-  const neuSakko = sakkoGr.has(altSakko) ? altSakko : "";
-  const neuHose  = hoseGr.has(altHose)   ? altHose  : "";
-
-  sakkoSel.innerHTML = '<option value="">Alle Größen</option>' + [...sakkoGr].sort().map(g => `<option ${g===neuSakko?"selected":""}>${g}</option>`).join("");
-  hoseSel.innerHTML  = '<option value="">Alle Größen</option>' + [...hoseGr].sort().map(g => `<option ${g===neuHose?"selected":""}>${g}</option>`).join("");
+  sakkoSel.innerHTML = '<option value="">Alle Größen</option>' + [...sakkoGr].sort().map(g => `<option ${g===altSakko?"selected":""}>${g}</option>`).join("");
+  hoseSel.innerHTML  = '<option value="">Alle Größen</option>' + [...hoseGr].sort().map(g => `<option ${g===altHose?"selected":""}>${g}</option>`).join("");
 }
 
 // ════════════════════════════════════════════
@@ -931,17 +877,6 @@ document.getElementById("photoViewer").addEventListener("click",e=>{ if(e.target
 function fmt(n) { return Number(n||0).toFixed(2).replace(".",","); }
 function esc(s) { return (s||"").replace(/'/g,"\\'"); }
 function waIcon() { return `<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.08L0 24l6.1-1.6A11.97 11.97 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.23-3.48-8.52ZM12 22a9.94 9.94 0 0 1-5.08-1.38l-.36-.22-3.76.99 1-3.65-.24-.38A9.95 9.95 0 0 1 2 12C2 6.49 6.49 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.94 9.94 0 0 1 22 12c0 5.51-4.49 10-10 10Zm5.44-7.47c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.07 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>`; }
-function zeigeImpressum() {
-  const el = document.getElementById("impressumBackdrop");
-  el.style.display = "flex";
-}
-
-function meldeBug() {
-  const betreff = encodeURIComponent("Bug-Meldung Uniformbörse");
-  const body    = encodeURIComponent("Hallo, ich möchte einen Bug in der Uniformbörse melden:\n\n[Beschreibe den Bug hier]\n\nSchritte zur Reproduktion:\n1. \n2. \n\nErwartetes Verhalten:\n\nTatsächliches Verhalten:");
-  window.location.href = `mailto:jschaffe3@gmail.com?subject=${betreff}&body=${body}`;
-}
-
 function showToast(msg) { const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),3200); }
 document.addEventListener("keydown", e => { if(e.key==="Escape"){ closeModal(); closeViewer(); } });
 </script>

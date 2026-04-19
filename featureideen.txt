@@ -63,7 +63,16 @@ Die Mail Adresse soll nicht sichtbar sein, es soll via mailto link sein und man 
 
 Impressum: das soll in einen generelles impressum gepackt werden mit einem text den man auf einer solchen website braucht. bitte gib mir da einen entwurf
 
+
 V5
 die Fußleiste soll IMMER unten am Desktop sein, aktuell wenn keine Anzeige online ist, schwebt sie in der mitte des displays.
 
 Browser Tab Icon. können wir das Logo als browser icon einbauen?
+
+im impressum soll unten ein button mit link auf github sein. es soll dort etwas stehen wie "Dieses Projekt auf GitHub ansehen" und darunter mittig das logo von guthub stehen. das logo habe ich als github.png im public ordner hinterlegt.
+
+V6
+Unter WhatsApp-Nummer ein hinweis, dass mit +49 oder einer andern ländervorwahl begonnen werden MUSS! sonst geht der whatsapp link nicht.
+Dann brauchen wir da eine Feldprüfung. die eingegbene nummer muss mit +49 oder einer anderen länder vorwahl starten. wie können wir das am besten machen?
+
+Der button im impressum zum Github ist nicht optimal. er soll unter dem stand des impressums stehen. das github logo muss größer sein, siehe das foto.

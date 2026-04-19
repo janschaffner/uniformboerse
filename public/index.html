@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uniformbörse – Hubertus-Schützengilde Ennigerloh e.V.</title>
+  <link rel="icon" type="image/png" href="logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
@@ -24,6 +25,8 @@
       --shadow:     0 2px 16px rgba(26,58,42,.12);
     }
     body { font-family:"Source Sans 3",sans-serif; background:var(--cream); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+    #appRoot { display:flex; flex-direction:column; min-height:100vh; }
+    #appRoot main { flex:1; }
 
     /* ── Buttons ── */
     .btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem 1rem; border-radius:var(--radius); border:none; cursor:pointer; font-family:inherit; font-size:.875rem; font-weight:600; transition:all .15s; text-decoration:none; }
@@ -310,7 +313,13 @@
           <strong style="font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);">Urheberrecht</strong>
           <p style="margin-top:.4rem;">Die durch den Betreiber erstellten Inhalte und Werke auf dieser Plattform unterliegen dem deutschen Urheberrecht. Die hochgeladenen Fotos und Texte der Inserate verbleiben im Eigentum der jeweiligen Inserenten.</p>
         </div>
-        <p style="font-size:.75rem;color:var(--muted);border-top:1px solid var(--border);padding-top:1rem;">Stand: April 2026 · Dieser Impressumsentwurf ersetzt keine Rechtsberatung.</p>
+        <div style="border-top:1px solid var(--border);padding-top:1rem;text-align:center;">
+          <a href="https://github.com/janschaffner/uniformboerse" target="_blank" rel="noopener" style="display:inline-flex;flex-direction:column;align-items:center;gap:.5rem;text-decoration:none;color:var(--text);font-size:.8rem;font-weight:600;opacity:.75;transition:opacity .15s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.75'">
+            Dieses Projekt auf GitHub ansehen
+            <img src="github.png" alt="GitHub" style="width:32px;height:32px;object-fit:contain;"/>
+          </a>
+        </div>
+        <p style="font-size:.75rem;color:var(--muted);text-align:center;">Stand: April 2026 · Dieser Impressumsentwurf ersetzt keine Rechtsberatung.</p>
       </div>
     </div>
   </div>
