@@ -23,162 +23,179 @@
       --radius:     4px;
       --shadow:     0 2px 16px rgba(26,58,42,.12);
     }
-    body { font-family: "Source Sans 3", sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
-    .btn { display: inline-flex; align-items: center; gap: .4rem; padding: .5rem 1rem; border-radius: var(--radius); border: none; cursor: pointer; font-family: inherit; font-size: .875rem; font-weight: 600; transition: all .15s; text-decoration: none; }
-    .btn-gold     { background: var(--gold); color: var(--green); }
-    .btn-gold:hover { background: var(--gold-light); }
-    .btn-red      { background: var(--red); color: #fff; }
-    .btn-red:hover { opacity: .85; }
-    .btn-loeschen { background: #444; color: #fff; }
-    .btn-loeschen:hover { background: #222; }
-    .btn-sm       { padding: .35rem .7rem; font-size: .8rem; }
-    .btn:disabled { opacity: .6; cursor: not-allowed; }
+    body { font-family:"Source Sans 3",sans-serif; background:var(--cream); color:var(--text); min-height:100vh; display:flex; flex-direction:column; }
+
+    /* ── Buttons ── */
+    .btn { display:inline-flex; align-items:center; gap:.4rem; padding:.5rem 1rem; border-radius:var(--radius); border:none; cursor:pointer; font-family:inherit; font-size:.875rem; font-weight:600; transition:all .15s; text-decoration:none; }
+    .btn-gold { background:var(--gold); color:var(--green); } .btn-gold:hover { background:var(--gold-light); }
+    .btn-red  { background:var(--red);  color:#fff; }         .btn-red:hover  { opacity:.85; }
+    .btn-dark { background:#444; color:#fff; }                .btn-dark:hover { background:#222; }
+    .btn-outline { background:transparent; border:1.5px solid var(--border); color:var(--muted); } .btn-outline:hover { border-color:var(--green-mid); color:var(--green); }
+    .btn-sm { padding:.35rem .7rem; font-size:.8rem; }
+    .btn:disabled { opacity:.6; cursor:not-allowed; }
 
     /* ── Passwort ── */
-    .pw-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1rem; }
-    .pw-card { background: white; border: 1px solid var(--border); border-top: 4px solid var(--gold); border-radius: var(--radius); padding: 2.5rem 2rem; width: 100%; max-width: 380px; text-align: center; box-shadow: var(--shadow); }
-    .pw-logo { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; margin-bottom: 1.25rem; border: 3px solid var(--gold); }
-    .pw-card h2 { font-family: "Playfair Display", serif; font-size: 1.4rem; margin-bottom: .4rem; }
-    .pw-card p  { color: var(--muted); font-size: .875rem; margin-bottom: 1.5rem; }
-    .pw-card input { width: 100%; border: 1.5px solid var(--border); border-radius: var(--radius); padding: .65rem .9rem; font-size: 1rem; font-family: inherit; margin-bottom: 1rem; text-align: center; letter-spacing: .1em; }
-    .pw-card input:focus { outline: none; border-color: var(--green-mid); }
-    .pw-card button { width: 100%; padding: .7rem; font-size: 1rem; justify-content: center; }
-    .pw-error { color: var(--red); font-size: .8rem; margin-top: .5rem; min-height: 1.2em; }
+    .pw-screen { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:1rem; }
+    .pw-card { background:white; border:1px solid var(--border); border-top:4px solid var(--gold); border-radius:var(--radius); padding:2.5rem 2rem; width:100%; max-width:380px; text-align:center; box-shadow:var(--shadow); }
+    .pw-logo { width:110px; height:110px; object-fit:cover; border-radius:50%; margin-bottom:1.25rem; border:3px solid var(--gold); }
+    .pw-card h2 { font-family:"Playfair Display",serif; font-size:1.4rem; margin-bottom:.4rem; }
+    .pw-card p  { color:var(--muted); font-size:.875rem; margin-bottom:1.5rem; }
+    .pw-card input { width:100%; border:1.5px solid var(--border); border-radius:var(--radius); padding:.65rem .9rem; font-size:1rem; font-family:inherit; margin-bottom:1rem; text-align:center; letter-spacing:.1em; }
+    .pw-card input:focus { outline:none; border-color:var(--green-mid); }
+    .pw-card button { width:100%; padding:.7rem; font-size:1rem; justify-content:center; }
+    .pw-error { color:var(--red); font-size:.8rem; margin-top:.5rem; min-height:1.2em; }
 
     /* ── Header ── */
-    header { background: var(--green); color: var(--cream); padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 68px; position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); }
-    .header-logo { display: flex; align-items: center; gap: .85rem; text-decoration: none; }
-    .header-logo img { width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 2px solid var(--gold); }
-    .header-title { font-family: "Playfair Display", serif; font-size: 1.15rem; color: var(--cream); line-height: 1.2; }
-    .header-sub   { font-size: .65rem; color: var(--gold-light); letter-spacing: .1em; text-transform: uppercase; }
+    header { background:var(--green); color:var(--cream); padding:0 1.5rem; display:flex; align-items:center; justify-content:space-between; height:68px; position:sticky; top:0; z-index:100; border-bottom:3px solid var(--gold); }
+    .header-brand { display:flex; align-items:center; gap:.85rem; }
+    .header-brand img { width:44px; height:44px; object-fit:cover; border-radius:50%; border:2px solid var(--gold); }
+    .header-title { font-family:"Playfair Display",serif; font-size:1.15rem; color:var(--cream); line-height:1.2; }
+    .header-sub   { font-size:.65rem; color:var(--gold-light); letter-spacing:.1em; text-transform:uppercase; }
 
     /* ── Hero ── */
-    .hero { background: linear-gradient(135deg, var(--green) 60%, var(--green-mid)); color: var(--cream); padding: 2.5rem 1.5rem 2rem; text-align: center; }
-    .hero h1 { font-family: "Playfair Display", serif; font-size: clamp(1.8rem,4vw,2.6rem); margin-bottom: .5rem; }
-    .hero p  { color: var(--gold-light); font-size: .9rem; max-width: 620px; margin: 0 auto; line-height: 1.6; }
-    .hero-divider { width: 60px; height: 3px; background: var(--gold); margin: 1rem auto; }
+    .hero { background:linear-gradient(135deg,var(--green) 60%,var(--green-mid)); color:var(--cream); padding:2.5rem 1.5rem 2rem; text-align:center; }
+    .hero h1 { font-family:"Playfair Display",serif; font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:.5rem; }
+    .hero p  { color:var(--gold-light); font-size:.9rem; max-width:620px; margin:0 auto; line-height:1.6; }
+    .hero-divider { width:60px; height:3px; background:var(--gold); margin:1rem auto; }
 
-    /* ── Tabs Übersicht ── */
-    .tabs { background: var(--green); display: flex; justify-content: center; border-bottom: 3px solid var(--gold); }
-    .tab-btn { background: none; border: none; color: var(--gold-light); font-family: inherit; font-size: .9rem; font-weight: 600; padding: .85rem 2rem; cursor: pointer; letter-spacing: .04em; text-transform: uppercase; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all .15s; }
-    .tab-btn:hover { color: var(--gold); }
-    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    /* ── Tabs ── */
+    .tabs { background:var(--green); display:flex; justify-content:center; border-bottom:3px solid var(--gold); }
+    .tab-btn { background:none; border:none; color:var(--gold-light); font-family:inherit; font-size:.85rem; font-weight:600; padding:.85rem 1.5rem; cursor:pointer; letter-spacing:.04em; text-transform:uppercase; border-bottom:3px solid transparent; margin-bottom:-3px; transition:all .15s; white-space:nowrap; }
+    .tab-btn:hover { color:var(--gold); }
+    .tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .tab-count { font-size:.7rem; background:rgba(255,255,255,.15); border-radius:10px; padding:.1rem .4rem; margin-left:.3rem; }
+    .tab-btn.active .tab-count { background:var(--gold); color:var(--green); }
 
     /* ── Filter ── */
-    .filter-bar { background: var(--parchment); border-bottom: 1px solid var(--border); padding: .75rem 1.5rem; display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
-    .filter-label { font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-    .filter-bar select { border: 1px solid var(--border); background: white; border-radius: var(--radius); padding: .4rem .7rem; font-family: inherit; font-size: .875rem; color: var(--text); }
-    .badge-count { margin-left: auto; background: var(--green); color: var(--gold-light); font-size: .75rem; font-weight: 600; padding: .2rem .6rem; border-radius: 20px; }
+    .filter-bar { background:var(--parchment); border-bottom:1px solid var(--border); padding:.75rem 1.5rem; display:flex; gap:.75rem; align-items:center; flex-wrap:wrap; }
+    .filter-label { font-size:.75rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    .filter-bar select { border:1px solid var(--border); background:white; border-radius:var(--radius); padding:.4rem .7rem; font-family:inherit; font-size:.8rem; color:var(--text); }
+    .badge-count { margin-left:auto; background:var(--green); color:var(--gold-light); font-size:.75rem; font-weight:600; padding:.2rem .6rem; border-radius:20px; }
 
     /* ── Grid ── */
-    main { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; flex: 1; width: 100%; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1.5rem; }
+    main { max-width:1200px; margin:0 auto; padding:2rem 1.5rem; flex:1; width:100%; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:1.5rem; }
 
     /* ── Karte ── */
-    .card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform .2s, box-shadow .2s; position: relative; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(26,58,42,.18); }
-    .card.verkauft { opacity: .55; }
-    .card-stripe { height: 4px; width: 100%; }
-    .card-stripe-herren { background: var(--green-mid); }
-    .card-stripe-damen  { background: var(--gold); }
-    .card-img { width: 100%; height: 200px; background: var(--parchment); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 2rem; cursor: pointer; position: relative; overflow: hidden; }
-    .card-img img { width: 100%; height: 100%; object-fit: cover; }
-    .img-counter { position: absolute; top: .5rem; right: .5rem; background: rgba(0,0,0,.5); color: #fff; font-size: .72rem; padding: .15rem .45rem; border-radius: 20px; }
-    /* Herren/Damen Label auf Foto */
-    .kat-label { position: absolute; top: .6rem; left: .6rem; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: .2rem .55rem; border-radius: 3px; }
-    .kat-label-herren { background: var(--green); color: var(--gold-light); border: 1px solid var(--gold); }
-    .kat-label-damen  { background: var(--gold); color: var(--green); }
-    .verkauft-badge { position: absolute; bottom: .6rem; left: .6rem; background: var(--red); color: white; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 3px; }
-    .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: .5rem; }
-    .card-title { font-family: "Playfair Display", serif; font-size: 1.05rem; font-weight: 700; }
-    .card-meta  { display: flex; flex-wrap: wrap; gap: .35rem; }
-    .tag { background: var(--parchment); border: 1px solid var(--border); border-radius: 3px; font-size: .72rem; font-weight: 600; padding: .15rem .5rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
-    .tag-gold  { background: #fdf3d8; border-color: var(--gold); color: #7a5c00; }
-    .tag-green { background: #e8f0eb; border-color: var(--green-mid); color: var(--green); }
-    .card-desc  { font-size: .85rem; color: var(--muted); line-height: 1.5; flex: 1; }
-    .card-price { font-family: "Playfair Display", serif; font-size: 1.3rem; color: var(--green); font-weight: 700; }
-    .card-footer { padding: .75rem 1rem; border-top: 1px solid var(--border); display: flex; gap: .5rem; align-items: center; background: var(--parchment); flex-wrap: wrap; }
-    .kontakt-bereich { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
-    .admin-actions { margin-left: auto; display: flex; gap: .3rem; }
-    .whatsapp-btn { display: inline-flex; align-items: center; gap: .4rem; background: #25d366; color: white; border: none; border-radius: var(--radius); padding: .45rem .85rem; font-size: .8rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: background .15s; }
-    .whatsapp-btn:hover { background: #1ebc59; }
+    .card { background:white; border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column; transition:transform .2s,box-shadow .2s; position:relative; }
+    .card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(26,58,42,.18); }
+    .card.verkauft { opacity:.55; }
+    .card-stripe { height:4px; }
+    .stripe-herren { background:var(--green-mid); }
+    .stripe-damen  { background:var(--gold); }
+    .card-img { width:100%; height:200px; background:var(--parchment); display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:2rem; cursor:pointer; position:relative; overflow:hidden; }
+    .card-img img { width:100%; height:100%; object-fit:cover; }
+    .img-counter { position:absolute; top:.5rem; right:.5rem; background:rgba(0,0,0,.5); color:#fff; font-size:.72rem; padding:.15rem .45rem; border-radius:20px; }
+    .kat-label { position:absolute; top:.6rem; left:.6rem; font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.06em; padding:.2rem .55rem; border-radius:3px; }
+    .kat-herren { background:var(--green); color:var(--gold-light); border:1px solid var(--gold); }
+    .kat-damen  { background:var(--gold); color:var(--green); }
+    .verkauft-badge { position:absolute; bottom:.6rem; left:.6rem; background:var(--red); color:white; font-size:.7rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:.2rem .6rem; border-radius:3px; }
+    .card-body { padding:1rem; flex:1; display:flex; flex-direction:column; gap:.4rem; }
+    .card-title { font-family:"Playfair Display",serif; font-size:1rem; font-weight:700; line-height:1.3; }
+    .card-subtitle { font-size:.82rem; color:var(--muted); }
+    .card-meta  { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.15rem; }
+    .tag { background:var(--parchment); border:1px solid var(--border); border-radius:3px; font-size:.7rem; font-weight:600; padding:.12rem .45rem; color:var(--muted); text-transform:uppercase; letter-spacing:.04em; }
+    .tag-green { background:#e8f0eb; border-color:var(--green-mid); color:var(--green); }
+    .card-desc  { font-size:.82rem; color:var(--muted); line-height:1.5; flex:1; margin-top:.2rem; }
+    /* Preisliste */
+    .preisliste { margin-top:.4rem; display:flex; flex-direction:column; gap:.15rem; }
+    .preis-zeile { display:flex; justify-content:space-between; align-items:center; font-size:.82rem; color:var(--muted); }
+    .preis-zeile.summe { border-top:1px solid var(--border); margin-top:.2rem; padding-top:.3rem; }
+    .preis-zeile.summe .preis-val { font-family:"Playfair Display",serif; font-size:1.2rem; color:var(--green); font-weight:700; }
+    .preis-val { font-weight:600; color:var(--text); }
+    .card-footer { padding:.75rem 1rem; border-top:1px solid var(--border); display:flex; gap:.5rem; align-items:center; background:var(--parchment); flex-wrap:wrap; }
+    .kontakt-bereich { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+    .admin-actions { margin-left:auto; display:flex; gap:.3rem; }
+    .whatsapp-btn { display:inline-flex; align-items:center; gap:.4rem; background:#25d366; color:white; border:none; border-radius:var(--radius); padding:.45rem .85rem; font-size:.8rem; font-weight:600; cursor:pointer; text-decoration:none; transition:background .15s; }
+    .whatsapp-btn:hover { background:#1ebc59; }
 
     /* ── Modal ── */
-    .backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 200; align-items: center; justify-content: center; padding: 1rem; }
-    .backdrop.open { display: flex; }
-    .modal { background: white; border-radius: var(--radius); width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto; border-top: 4px solid var(--gold); box-shadow: 0 20px 60px rgba(0,0,0,.3); }
-    .modal-header { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: white; z-index: 1; }
-    .modal-header h2 { font-family: "Playfair Display", serif; font-size: 1.2rem; }
-    .close-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--muted); }
-    .close-btn:hover { color: var(--text); }
-    .modal-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
+    .backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+    .backdrop.open { display:flex; }
+    .modal { background:white; border-radius:var(--radius); width:100%; max-width:580px; max-height:90vh; overflow-y:auto; border-top:4px solid var(--gold); box-shadow:0 20px 60px rgba(0,0,0,.3); }
+    .modal-header { padding:1.25rem 1.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:white; z-index:1; }
+    .modal-header h2 { font-family:"Playfair Display",serif; font-size:1.2rem; }
+    .close-btn { background:none; border:none; font-size:1.3rem; cursor:pointer; color:var(--muted); }
+    .close-btn:hover { color:var(--text); }
+    .modal-body { padding:1.5rem; display:flex; flex-direction:column; gap:1rem; }
 
     /* ── Formular-Tabs ── */
-    .form-tabs { display: flex; border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-    .form-tab { flex: 1; padding: .65rem; text-align: center; cursor: pointer; font-size: .9rem; font-weight: 600; color: var(--muted); background: var(--parchment); border: none; font-family: inherit; transition: all .15s; }
-    .form-tab.active-herren { background: var(--green); color: var(--gold-light); }
-    .form-tab.active-damen  { background: var(--gold); color: var(--green); }
+    .form-tabs { display:flex; border:1.5px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+    .form-tab { flex:1; padding:.65rem; text-align:center; cursor:pointer; font-size:.9rem; font-weight:600; color:var(--muted); background:var(--parchment); border:none; font-family:inherit; transition:all .15s; }
+    .ftab-herren { background:var(--green); color:var(--gold-light); }
+    .ftab-damen  { background:var(--gold);  color:var(--green); }
 
     /* ── Hosen ── */
-    .hose-block { border: 1.5px solid var(--border); border-radius: var(--radius); padding: .75rem; display: flex; flex-direction: column; gap: .5rem; }
-    .hose-zeile { display: flex; gap: .5rem; align-items: center; }
-    .hose-zeile input { flex: 1; border: 1.5px solid var(--border); border-radius: var(--radius); padding: .5rem .65rem; font-family: inherit; font-size: .875rem; }
-    .hose-zeile input:focus { outline: none; border-color: var(--green-mid); }
-    .hose-del { background: none; border: 1px solid var(--border); border-radius: var(--radius); width: 32px; height: 32px; cursor: pointer; color: var(--muted); font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .hose-del:hover { background: #fee; border-color: var(--red); color: var(--red); }
-    .hose-add { background: none; border: 1.5px dashed var(--border); border-radius: var(--radius); padding: .4rem; width: 100%; cursor: pointer; color: var(--muted); font-family: inherit; font-size: .8rem; transition: all .15s; }
-    .hose-add:hover { border-color: var(--green-mid); color: var(--green); }
+    .hose-block { border:1.5px solid var(--border); border-radius:var(--radius); padding:.75rem; display:flex; flex-direction:column; gap:.5rem; }
+    .hose-zeile { display:flex; gap:.5rem; align-items:center; }
+    .hose-zeile input { flex:1; border:1.5px solid var(--border); border-radius:var(--radius); padding:.5rem .65rem; font-family:inherit; font-size:.875rem; }
+    .hose-zeile input:focus { outline:none; border-color:var(--green-mid); }
+    .hose-del { background:none; border:1px solid var(--border); border-radius:var(--radius); width:32px; height:32px; cursor:pointer; color:var(--muted); font-size:1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .hose-del:hover { background:#fee; border-color:var(--red); color:var(--red); }
+    .hose-add { background:none; border:1.5px dashed var(--border); border-radius:var(--radius); padding:.4rem; width:100%; cursor:pointer; color:var(--muted); font-family:inherit; font-size:.8rem; transition:all .15s; }
+    .hose-add:hover { border-color:var(--green-mid); color:var(--green); }
 
     /* ── Felder ── */
-    .field { display: flex; flex-direction: column; gap: .35rem; }
-    .field label { font-size: .8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-    .field input, .field select, .field textarea { border: 1.5px solid var(--border); border-radius: var(--radius); padding: .55rem .75rem; font-family: inherit; font-size: .9rem; color: var(--text); transition: border-color .15s; background: white; }
-    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green-mid); }
-    .field textarea { resize: vertical; min-height: 80px; }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .radio-group { display: flex; gap: .5rem; }
-    .radio-label { flex: 1; display: flex; align-items: center; justify-content: center; gap: .4rem; padding: .5rem; border: 1.5px solid var(--border); border-radius: var(--radius); cursor: pointer; font-size: .875rem; font-weight: 600; color: var(--muted); transition: all .15s; }
-    .radio-label:has(input:checked) { border-color: var(--green-mid); background: #e8f0eb; color: var(--green); }
-    .chk-label { display: flex; align-items: center; gap: .45rem; font-size: .85rem; cursor: pointer; padding: .35rem .5rem; border: 1px solid var(--border); border-radius: var(--radius); transition: background .12s; width: fit-content; }
-    .chk-label:hover { background: var(--parchment); }
-    .chk-label input[type=checkbox]:checked + span { font-weight: 600; color: var(--green); }
-    .section-divider { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom: 1px solid var(--border); padding-bottom: .35rem; margin-top: .25rem; }
+    .field { display:flex; flex-direction:column; gap:.35rem; }
+    .field label { font-size:.75rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+    .field input,.field select,.field textarea { border:1.5px solid var(--border); border-radius:var(--radius); padding:.55rem .75rem; font-family:inherit; font-size:.9rem; color:var(--text); transition:border-color .15s; background:white; }
+    .field input:focus,.field select:focus,.field textarea:focus { outline:none; border-color:var(--green-mid); }
+    .field textarea { resize:vertical; min-height:70px; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+    .radio-group { display:flex; gap:.5rem; }
+    .radio-label { flex:1; display:flex; align-items:center; justify-content:center; gap:.4rem; padding:.5rem; border:1.5px solid var(--border); border-radius:var(--radius); cursor:pointer; font-size:.875rem; font-weight:600; color:var(--muted); transition:all .15s; }
+    .radio-label:has(input:checked) { border-color:var(--green-mid); background:#e8f0eb; color:var(--green); }
+    .chk-label { display:flex; align-items:center; gap:.45rem; font-size:.85rem; cursor:pointer; padding:.35rem .5rem; border:1px solid var(--border); border-radius:var(--radius); transition:background .12s; width:fit-content; }
+    .chk-label:hover { background:var(--parchment); }
+    .chk-label input[type=checkbox]:checked + span { font-weight:600; color:var(--green); }
+    .sec { font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); border-bottom:1px solid var(--border); padding-bottom:.3rem; margin-top:.1rem; }
 
     /* ── Upload ── */
-    .upload-area { border: 2px dashed var(--border); border-radius: var(--radius); padding: 1.5rem; text-align: center; cursor: pointer; transition: border-color .15s, background .15s; color: var(--muted); }
-    .upload-area:hover, .upload-area.drag { border-color: var(--green-mid); background: var(--parchment); }
-    .upload-area input { display: none; }
-    .upload-previews { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .75rem; }
-    .preview-thumb-wrap { position: relative; }
-    .preview-thumb { width: 70px; height: 70px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); display: block; }
-    .preview-thumb-wrap button { position: absolute; top: -5px; right: -5px; width: 18px; height: 18px; background: var(--red); color: white; border: none; border-radius: 50%; font-size: .65rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .upload-area { border:2px dashed var(--border); border-radius:var(--radius); padding:1.25rem; text-align:center; cursor:pointer; transition:border-color .15s,background .15s; color:var(--muted); }
+    .upload-area:hover,.upload-area.drag { border-color:var(--green-mid); background:var(--parchment); }
+    .upload-area input { display:none; }
+    .upload-previews { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.75rem; }
+    .preview-wrap { position:relative; }
+    .preview-thumb { width:70px; height:70px; object-fit:cover; border-radius:var(--radius); border:1px solid var(--border); display:block; }
+    .preview-wrap button { position:absolute; top:-5px; right:-5px; width:18px; height:18px; background:var(--red); color:white; border:none; border-radius:50%; font-size:.65rem; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+
+    /* ── Bestätigung ── */
+    .confirm-box { background:var(--parchment); border:1.5px solid var(--border); border-radius:var(--radius); padding:1.25rem; display:flex; flex-direction:column; gap:.6rem; }
+    .confirm-box h3 { font-family:"Playfair Display",serif; font-size:1rem; color:var(--green); }
+    .confirm-row { display:flex; justify-content:space-between; font-size:.85rem; border-bottom:1px dashed var(--border); padding-bottom:.4rem; }
+    .confirm-row:last-child { border-bottom:none; }
+    .confirm-label { color:var(--muted); font-weight:600; }
+    .confirm-fotos { display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.25rem; }
+    .confirm-thumb { width:50px; height:50px; object-fit:cover; border-radius:var(--radius); border:1px solid var(--border); }
+    .confirm-actions { display:flex; gap:.75rem; }
+    .confirm-actions .btn { flex:1; justify-content:center; }
 
     /* ── Foto-Viewer ── */
-    .photo-viewer { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 300; align-items: center; justify-content: center; }
-    .photo-viewer.open { display: flex; }
-    .photo-viewer img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: var(--radius); }
-    .pv-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.15); border: none; color: white; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; }
-    .pv-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.15); border: none; color: white; font-size: 1.5rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; }
-    .pv-prev { left: 1rem; } .pv-next { right: 1rem; }
+    .photo-viewer { display:none; position:fixed; inset:0; background:rgba(0,0,0,.92); z-index:300; align-items:center; justify-content:center; }
+    .photo-viewer.open { display:flex; }
+    .photo-viewer img { max-width:90vw; max-height:90vh; object-fit:contain; border-radius:var(--radius); }
+    .pv-close { position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,.15); border:none; color:white; font-size:1.5rem; width:40px; height:40px; border-radius:50%; cursor:pointer; }
+    .pv-nav { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,.15); border:none; color:white; font-size:1.5rem; width:44px; height:44px; border-radius:50%; cursor:pointer; }
+    .pv-prev { left:1rem; } .pv-next { right:1rem; }
 
     /* ── Footer ── */
-    footer { background: var(--green); border-top: 3px solid var(--gold); padding: 1.25rem 1.5rem; text-align: center; }
-    .footer-text { color: var(--gold-light); font-size: .75rem; line-height: 1.6; max-width: 700px; margin: 0 auto; opacity: .85; }
+    footer { background:var(--green); border-top:3px solid var(--gold); padding:1.25rem 1.5rem; text-align:center; }
+    .footer-text { color:var(--gold-light); font-size:.75rem; line-height:1.6; max-width:700px; margin:0 auto; opacity:.85; }
 
     /* ── Misc ── */
-    .empty { text-align: center; padding: 4rem 1rem; color: var(--muted); }
-    .empty-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4); border-top-color: white; border-radius: 50%; animation: spin .7s linear infinite; }
-    .spinner-dark { border-color: rgba(26,58,42,.2); border-top-color: var(--green); }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); background: var(--green); color: var(--gold-light); padding: .75rem 1.5rem; border-radius: 30px; font-weight: 600; font-size: .875rem; z-index: 400; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; border: 1px solid var(--gold); }
-    .toast.show { opacity: 1; }
-    .hint { font-size: .75rem; color: var(--muted); }
+    .empty { text-align:center; padding:4rem 1rem; color:var(--muted); }
+    .empty-icon { font-size:3rem; margin-bottom:1rem; }
+    .spinner { display:inline-block; width:16px; height:16px; border:2px solid rgba(255,255,255,.4); border-top-color:white; border-radius:50%; animation:spin .7s linear infinite; }
+    .spinner-dark { border-color:rgba(26,58,42,.2); border-top-color:var(--green); }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .toast { position:fixed; bottom:1.5rem; left:50%; transform:translateX(-50%); background:var(--green); color:var(--gold-light); padding:.75rem 1.5rem; border-radius:30px; font-weight:600; font-size:.875rem; z-index:400; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; border:1px solid var(--gold); }
+    .toast.show { opacity:1; }
+    .hint { font-size:.72rem; color:var(--muted); }
 
-    @media (max-width: 520px) {
-      .field-row { grid-template-columns: 1fr; }
-      header nav .btn span { display: none; }
-      .tab-btn { padding: .85rem 1rem; font-size: .8rem; }
+    @media (max-width:520px) {
+      .field-row { grid-template-columns:1fr; }
+      header nav .btn span { display:none; }
+      .tab-btn { padding:.85rem .75rem; font-size:.75rem; }
     }
   </style>
 </head>
@@ -198,9 +215,8 @@
 
 <!-- ══ APP ══ -->
 <div id="appRoot" style="display:none">
-
   <header>
-    <div class="header-logo">
+    <div class="header-brand">
       <img src="logo.png" alt="Logo" />
       <div>
         <div class="header-title">Uniformbörse</div>
@@ -215,23 +231,25 @@
   <div class="hero">
     <h1>Uniformbörse</h1>
     <div class="hero-divider"></div>
-    <p>Hier können gebrauchte Uniformen der Hubertus-Schützengilde Ennigerloh e.V. angeboten und erworben werden. Kontaktaufnahme zu den Verkäufern via WhatsApp. Alle Preise sind Verhandlungsbasis und werden zwischen dem Käufer und Verkäufer festgelegt.</p>
+    <p>Hier können gebrauchte Uniformen der Hubertus-Schützengilde Ennigerloh e.V. angeboten und erworben werden. Kontaktaufnahme zu den Verkäufern via WhatsApp. Alle Preise sind Verhandlungsbasis und werden zwischen Käufer und Verkäufer festgelegt.</p>
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="wechselTab('alle',this)">Alle</button>
-    <button class="tab-btn" onclick="wechselTab('herren',this)">Herren</button>
-    <button class="tab-btn" onclick="wechselTab('damen',this)">Damen</button>
+    <button class="tab-btn active" id="tabAlle"   onclick="wechselTab('alle',this)">Alle <span class="tab-count" id="cntAlle">0</span></button>
+    <button class="tab-btn"        id="tabHerren" onclick="wechselTab('herren',this)">Herren <span class="tab-count" id="cntHerren">0</span></button>
+    <button class="tab-btn"        id="tabDamen"  onclick="wechselTab('damen',this)">Damen <span class="tab-count" id="cntDamen">0</span></button>
   </div>
 
   <div class="filter-bar">
     <span class="filter-label">Sakko/Blazer:</span>
-    <select id="filterSakko" onchange="renderInserate()">
-      <option value="">Alle Größen</option>
-    </select>
+    <select id="filterSakko" onchange="renderInserate()"><option value="">Alle Größen</option></select>
     <span class="filter-label">Hose:</span>
-    <select id="filterHose" onchange="renderInserate()">
-      <option value="">Alle Größen</option>
+    <select id="filterHose" onchange="renderInserate()"><option value="">Alle Größen</option></select>
+    <span class="filter-label">Typ:</span>
+    <select id="filterPatch" onchange="renderInserate()">
+      <option value="">Alle</option>
+      <option>Jungschützen</option>
+      <option>Ehrengarde</option>
     </select>
     <label style="display:flex;align-items:center;gap:.4rem;cursor:pointer;font-size:.8rem">
       <input type="checkbox" id="filterVerfuegbar" onchange="renderInserate()" checked /> Nur verfügbare
@@ -247,128 +265,14 @@
   </main>
 
   <footer>
-    <p class="footer-text">
-      Die Uniformbörse ist kein offizielles Angebot der Hubertus-Schützengilde Ennigerloh e.V.
-      Der Betreiber übernimmt keine Haftung für die Richtigkeit der Angaben, Schäden aus Vertragsabschlüssen
-      oder den Missbrauch personenbezogener Daten. Die Angabe personenbezogener Daten erfolgt freiwillig
-      und auf eigene Verantwortung. Käufer und Verkäufer handeln eigenständig und auf eigenes Risiko.
-    </p>
+    <p class="footer-text">Die Uniformbörse ist kein offizielles Angebot der Hubertus-Schützengilde Ennigerloh e.V. Der Betreiber übernimmt keine Haftung für die Richtigkeit der Angaben, Schäden aus Vertragsabschlüssen oder den Missbrauch personenbezogener Daten. Die Angabe personenbezogener Daten erfolgt freiwillig und auf eigene Verantwortung. Käufer und Verkäufer handeln eigenständig und auf eigenes Risiko.</p>
   </footer>
 </div>
 
 <!-- ══ MODAL ══ -->
 <div class="backdrop" id="modalBackdrop" onclick="closeOnBackdrop(event)">
-  <div class="modal">
-    <div class="modal-header">
-      <h2>Inserat aufgeben</h2>
-      <button class="close-btn" onclick="closeModal()">✕</button>
-    </div>
-    <div class="modal-body">
-
-      <div class="field">
-        <label>Kategorie *</label>
-        <div class="form-tabs">
-          <button type="button" class="form-tab active-herren" id="tabHerren" onclick="wechselFormTab('herren')">👔 Herren</button>
-          <button type="button" class="form-tab" id="tabDamen" onclick="wechselFormTab('damen')">👗 Damen</button>
-        </div>
-      </div>
-
-      <!-- HERREN -->
-      <div id="herrenFelder">
-        <div style="display:flex;flex-direction:column;gap:1.1rem">
-          <div class="section-divider">Jungschützen / Ehrengarden</div>
-          <div class="field">
-            <div class="radio-group">
-              <label class="radio-label"><input type="radio" name="hPatch" value="Jungschützen" id="hPatchJung" /> Jungschützen</label>
-              <label class="radio-label"><input type="radio" name="hPatch" value="Ehrengarden" id="hPatchEhren" /> Ehrengarden</label>
-            </div>
-          </div>
-          <div class="section-divider">Sakko</div>
-          <label class="chk-label"><input type="checkbox" id="hatSakko" onchange="toggleSakko()" checked /><span>Sakko vorhanden</span></label>
-          <div id="sakkoFelder">
-            <div class="field-row">
-              <div class="field"><label>Sakko-Größe *</label><input type="text" id="fSakkoGroesse" placeholder="z.B. 48, M, 50 kurz…" /></div>
-              <div class="field"><label>Preis Sakko (€) *</label><input type="number" id="fSakkoPreis" placeholder="z.B. 80" min="0" /></div>
-            </div>
-          </div>
-          <div class="section-divider">Hosen</div>
-          <label class="chk-label"><input type="checkbox" id="hatHosen" onchange="toggleHosen()" /><span>Hose(n) vorhanden</span></label>
-          <div id="hosenFelder" style="display:none">
-            <div class="hose-block" id="hosenListe"></div>
-            <button type="button" class="hose-add" onclick="hoseHinzufuegen()" style="margin-top:.5rem">＋ Weitere Hose hinzufügen</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- DAMEN -->
-      <div id="damenFelder" style="display:none">
-        <div style="display:flex;flex-direction:column;gap:1.1rem">
-          <div class="section-divider">Jungschützen / Ehrengarden</div>
-          <div class="field">
-            <div class="radio-group">
-              <label class="radio-label"><input type="radio" name="dPatch" value="Jungschützen" id="dPatchJung" /> Jungschützen</label>
-              <label class="radio-label"><input type="radio" name="dPatch" value="Ehrengarden" id="dPatchEhren" /> Ehrengarden</label>
-            </div>
-          </div>
-          <div class="section-divider">Blazer</div>
-          <label class="chk-label"><input type="checkbox" id="dHatBlazer" onchange="toggleBlazer()" checked /><span>Blazer vorhanden</span></label>
-          <div id="blazerFelder">
-            <div class="field-row">
-              <div class="field"><label>Blazer-Größe *</label><input type="text" id="fBlazerGroesse" placeholder="z.B. 36, S, 38…" /></div>
-              <div class="field"><label>Preis Blazer (€) *</label><input type="number" id="fBlazerPreis" placeholder="z.B. 80" min="0" /></div>
-            </div>
-          </div>
-          <div class="section-divider">Grünes Tuch</div>
-          <label class="chk-label"><input type="checkbox" id="dHatTuch" onchange="toggleTuch()" /><span>Grünes Tuch vorhanden</span></label>
-          <div id="tuchFelder" style="display:none">
-            <div class="field" style="max-width:200px">
-              <label>Preis Tuch (€)</label>
-              <input type="number" id="fTuchPreis" placeholder="z.B. 15" min="0" />
-            </div>
-          </div>
-          <div class="section-divider">Hosen</div>
-          <label class="chk-label"><input type="checkbox" id="dHatHosen" onchange="toggleDamenHosen()" /><span>Hose(n) vorhanden</span></label>
-          <div id="damenHosenFelder" style="display:none">
-            <div class="hose-block" id="damenHosenListe"></div>
-            <button type="button" class="hose-add" onclick="damenHoseHinzufuegen()" style="margin-top:.5rem">＋ Weitere Hose hinzufügen</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- GEMEINSAM -->
-      <div class="section-divider">Allgemein</div>
-      <div class="field">
-        <label>Zustand</label>
-        <select id="fZustand"><option>Wie neu</option><option>Gut erhalten</option><option>Gebrauchsspuren</option></select>
-      </div>
-      <div class="field">
-        <label>Beschreibung</label>
-        <textarea id="fBeschreibung" placeholder="Weitere Details, Besonderheiten, Passform-Hinweise…"></textarea>
-      </div>
-      <div class="field">
-        <label>Fotos * <span class="hint">(max. 10)</span></label>
-        <div class="upload-area" id="uploadArea" onclick="fotoKlick()"
-             ondragover="event.preventDefault();this.classList.add('drag')"
-             ondragleave="this.classList.remove('drag')"
-             ondrop="handleDrop(event)">
-          <input type="file" id="fotoInput" multiple accept="image/*" onchange="handleFiles(this.files)" />
-          📷 Klicken oder Fotos hierher ziehen<br/><small style="color:var(--muted)">JPG, PNG – bis zu 10 Fotos</small>
-        </div>
-        <div class="upload-previews" id="uploadPreviews"></div>
-      </div>
-      <div class="section-divider">Kontakt</div>
-      <div class="field-row">
-        <div class="field"><label>Name *</label><input type="text" id="fName" placeholder="Vorname Nachname" /></div>
-        <div class="field">
-          <label>WhatsApp-Nummer *</label>
-          <input type="tel" id="fTelefon" placeholder="+49 151 12345678" />
-          <span class="hint">Nur für eingeloggte Mitglieder sichtbar</span>
-        </div>
-      </div>
-      <button class="btn btn-gold" id="submitBtn" onclick="submitInserat()" style="width:100%;padding:.75rem;font-size:1rem;justify-content:center">
-        Inserat veröffentlichen
-      </button>
-    </div>
+  <div class="modal" id="modalInhalt">
+    <!-- Inhalt wird per JS gesetzt: Formular oder Bestätigung -->
   </div>
 </div>
 
@@ -382,319 +286,599 @@
 <div class="toast" id="toast"></div>
 
 <script>
-let sessionPasswort="", alleInserate=[], fotoFiles=[], fotoUrls=[], viewerPhotos=[], viewerIdx=0;
-let aktiverTab="alle", formKategorie="herren", submitLaeuft=false;
-let hosenZaehler=0, dHosenZaehler=0;
-const MAX_FOTOS=10;
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let sessionPw    = "";
+let alleInserate = [];
+let fotoFiles    = [], fotoUrls = [];
+let viewerPhotos = [], viewerIdx = 0;
+let aktiverTab   = "alle";
+let formArt      = "herren";
+let submitLaeuft = false;
+let hosenZ = 0, dHosenZ = 0;
+const MAX_FOTOS  = 10;
 
-// ── Passwort ──
-async function checkPw(){
-  const pw=document.getElementById("pwInput").value, btn=document.getElementById("pwBtn"), err=document.getElementById("pwError");
-  if(!pw){err.textContent="Bitte Passwort eingeben.";return;}
-  btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true; err.textContent="";
-  try{
-    const res=await fetch("/.netlify/functions/passwort-pruefen",{method:"POST",body:JSON.stringify({passwort:pw})});
-    if(res.status===401){err.textContent="Falsches Passwort.";}
-    else{sessionPasswort=pw;document.getElementById("pwScreen").style.display="none";document.getElementById("appRoot").style.display="block";initApp();}
-  }catch{err.textContent="Verbindungsfehler.";}
-  finally{btn.innerHTML="Zugang erhalten";btn.disabled=false;}
+// Formular-Daten für Bestätigung
+let pendingDaten = null;
+
+// ════════════════════════════════════════════
+// PASSWORT
+// ════════════════════════════════════════════
+async function checkPw() {
+  const pw  = document.getElementById("pwInput").value;
+  const btn = document.getElementById("pwBtn");
+  const err = document.getElementById("pwError");
+  if (!pw) { err.textContent = "Bitte Passwort eingeben."; return; }
+  btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true; err.textContent = "";
+  try {
+    const res = await fetch("/.netlify/functions/passwort-pruefen", { method:"POST", body:JSON.stringify({passwort:pw}) });
+    if (res.status === 401) { err.textContent = "Falsches Passwort."; }
+    else { sessionPw = pw; document.getElementById("pwScreen").style.display="none"; document.getElementById("appRoot").style.display="block"; initApp(); }
+  } catch { err.textContent = "Verbindungsfehler."; }
+  finally { btn.innerHTML = "Zugang erhalten"; btn.disabled = false; }
 }
 
-async function initApp(){hoseHinzufuegen();damenHoseHinzufuegen();await ladeDaten();}
+// ════════════════════════════════════════════
+// INIT & DATEN
+// ════════════════════════════════════════════
+async function initApp() { await ladeDaten(); }
 
-async function ladeDaten(){
-  try{const res=await fetch("/.netlify/functions/inserate-laden");alleInserate=await res.json();aktualisiereFilter();renderInserate();}
-  catch{showToast("⚠️ Fehler beim Laden");}
+async function ladeDaten() {
+  try {
+    const res = await fetch("/.netlify/functions/inserate-laden");
+    alleInserate = await res.json();
+    aktualisiereFilter();
+    aktualisiereTabs();
+    renderInserate();
+  } catch { showToast("⚠️ Fehler beim Laden"); }
 }
 
-// ── Filter aus Daten befüllen ──
-function aktualisiereFilter(){
-  const sakkoGrSel=document.getElementById("filterSakko"), hoseGrSel=document.getElementById("filterHose");
-  const sakkoGrAlt=sakkoGrSel.value, hoseGrAlt=hoseGrSel.value;
-
-  const sakkoGr=new Set(), hoseGr=new Set();
-  alleInserate.forEach(i=>{
-    if(i.sakko?.groesse)     sakkoGr.add(i.sakko.groesse);
-    if(i.blazer?.groesse)    sakkoGr.add(i.blazer.groesse);
-    (i.hosen||[]).forEach(h=>{ if(h.groesse) hoseGr.add(h.groesse); });
-    (i.damenHosen||[]).forEach(h=>{ if(h.groesse) hoseGr.add(h.groesse); });
-  });
-
-  sakkoGrSel.innerHTML='<option value="">Alle Größen</option>'+[...sakkoGr].sort().map(g=>`<option ${g===sakkoGrAlt?"selected":""}>${g}</option>`).join("");
-  hoseGrSel.innerHTML='<option value="">Alle Größen</option>' +[...hoseGr].sort().map(g=>`<option ${g===hoseGrAlt?"selected":""}>${g}</option>`).join("");
-}
-
-// ── Tabs ──
-function wechselTab(tab,el){
-  aktiverTab=tab;
-  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active")); el.classList.add("active");
+// ════════════════════════════════════════════
+// TABS & FILTER
+// ════════════════════════════════════════════
+function wechselTab(tab, el) {
+  aktiverTab = tab;
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+  aktualisiereFilter();
   renderInserate();
 }
-function wechselFormTab(kat){
-  formKategorie=kat;
-  document.getElementById("tabHerren").className="form-tab"+(kat==="herren"?" active-herren":"");
-  document.getElementById("tabDamen").className ="form-tab"+(kat==="damen" ?" active-damen":"");
-  document.getElementById("herrenFelder").style.display=kat==="herren"?"":"none";
-  document.getElementById("damenFelder").style.display =kat==="damen" ?"":"none";
+
+function aktualisiereTabs() {
+  const verf = alleInserate.filter(i => !i.verkauft);
+  document.getElementById("cntAlle").textContent    = verf.length;
+  document.getElementById("cntHerren").textContent  = verf.filter(i => i.art === "herren").length;
+  document.getElementById("cntDamen").textContent   = verf.filter(i => i.art === "damen").length;
 }
 
-// ── Toggles ──
-function toggleSakko()      { document.getElementById("sakkoFelder").style.display       =document.getElementById("hatSakko").checked ?"":"none"; }
-function toggleHosen()      { document.getElementById("hosenFelder").style.display       =document.getElementById("hatHosen").checked ?"":"none"; }
-function toggleBlazer()     { document.getElementById("blazerFelder").style.display      =document.getElementById("dHatBlazer").checked?"":"none"; }
-function toggleTuch()       { document.getElementById("tuchFelder").style.display        =document.getElementById("dHatTuch").checked  ?"":"none"; }
-function toggleDamenHosen() { document.getElementById("damenHosenFelder").style.display  =document.getElementById("dHatHosen").checked ?"":"none"; }
+function aktualisiereFilter() {
+  const sakkoSel = document.getElementById("filterSakko");
+  const hoseSel  = document.getElementById("filterHose");
+  const altSakko = sakkoSel.value, altHose = hoseSel.value;
 
-function hoseHinzufuegen(){
-  const id=++hosenZaehler, div=document.createElement("div");
-  div.className="hose-zeile"; div.id=`hose-${id}`;
-  div.innerHTML=`<input type="text" placeholder="Größe (z.B. W32/L32, 48…)" id="hoseG-${id}"/><input type="number" placeholder="Preis €" id="hoseP-${id}" min="0" style="width:90px"/><button type="button" class="hose-del" onclick="document.getElementById('hose-${id}').remove()">✕</button>`;
-  document.getElementById("hosenListe").appendChild(div);
-}
-function damenHoseHinzufuegen(){
-  const id=++dHosenZaehler, div=document.createElement("div");
-  div.className="hose-zeile"; div.id=`dhose-${id}`;
-  div.innerHTML=`<input type="text" placeholder="Größe (z.B. W30/L30, 38…)" id="dhoseG-${id}"/><input type="number" placeholder="Preis €" id="dhoseP-${id}" min="0" style="width:90px"/><button type="button" class="hose-del" onclick="document.getElementById('dhose-${id}').remove()">✕</button>`;
-  document.getElementById("damenHosenListe").appendChild(div);
-}
+  const sakkoGr = new Set(), hoseGr = new Set();
+  alleInserate
+    .filter(i => aktiverTab === "alle" || i.art === aktiverTab)
+    .filter(i => !i.verkauft || !document.getElementById("filterVerfuegbar").checked)
+    .forEach(i => {
+      if (i.sakko?.groesse)  sakkoGr.add(i.sakko.groesse.trim());
+      if (i.blazer?.groesse) sakkoGr.add(i.blazer.groesse.trim());
+      [...(i.hosen||[]), ...(i.damenHosen||[])].forEach(h => { if (h.groesse) hoseGr.add(h.groesse.trim()); });
+    });
 
-// ── Fotos ──
-function fotoKlick(){if(fotoFiles.length>=MAX_FOTOS){showToast(`⚠️ Maximal ${MAX_FOTOS} Fotos`);return;}document.getElementById("fotoInput").click();}
-function handleFiles(files){
-  const rest=MAX_FOTOS-fotoFiles.length, auswahl=Array.from(files).slice(0,rest);
-  if(files.length>rest) showToast(`⚠️ Nur ${rest} weitere Foto(s) möglich`);
-  for(const f of auswahl){fotoFiles.push(f);fotoUrls.push(URL.createObjectURL(f));}
-  document.getElementById("fotoInput").value=""; renderPreviews();
-}
-function handleDrop(e){e.preventDefault();document.getElementById("uploadArea").classList.remove("drag");handleFiles(e.dataTransfer.files);}
-function renderPreviews(){
-  document.getElementById("uploadPreviews").innerHTML=fotoUrls.map((u,i)=>`<div class="preview-thumb-wrap"><img class="preview-thumb" src="${u}"/><button onclick="removeFoto(${i})">✕</button></div>`).join("");
-  document.getElementById("uploadArea").style.opacity=fotoFiles.length>=MAX_FOTOS?".5":"1";
-}
-function removeFoto(idx){URL.revokeObjectURL(fotoUrls[idx]);fotoFiles.splice(idx,1);fotoUrls.splice(idx,1);renderPreviews();}
-async function uploadZuCloudinary(file){
-  const cn=document.querySelector('meta[name="cn"]')?.content||"", cp=document.querySelector('meta[name="cp"]')?.content||"";
-  if(!cn||!cp) throw new Error("Cloudinary nicht konfiguriert");
-  const fd=new FormData(); fd.append("file",file); fd.append("upload_preset",cp);
-  const res=await fetch(`https://api.cloudinary.com/v1_1/${cn}/image/upload`,{method:"POST",body:fd});
-  const d=await res.json(); if(!d.secure_url) throw new Error("Upload fehlgeschlagen");
-  return d.secure_url;
+  sakkoSel.innerHTML = '<option value="">Alle Größen</option>' + [...sakkoGr].sort().map(g => `<option ${g===altSakko?"selected":""}>${g}</option>`).join("");
+  hoseSel.innerHTML  = '<option value="">Alle Größen</option>' + [...hoseGr].sort().map(g => `<option ${g===altHose?"selected":""}>${g}</option>`).join("");
 }
 
-// ── Submit ──
-async function submitInserat(){
-  if(submitLaeuft) return;
-  const name=document.getElementById("fName").value.trim(), tel=document.getElementById("fTelefon").value.trim();
-  const zustand=document.getElementById("fZustand").value, beschr=document.getElementById("fBeschreibung").value.trim();
-  let titel="", groesse="", preis=0, extra={};
+// ════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════
+function renderInserate() {
+  const sakkoF = document.getElementById("filterSakko").value.trim();
+  const hoseF  = document.getElementById("filterHose").value.trim();
+  const patchF = document.getElementById("filterPatch").value;
+  const nv     = document.getElementById("filterVerfuegbar").checked;
 
-  if(formKategorie==="herren"){
-    const patch=document.querySelector('input[name="hPatch"]:checked')?.value;
-    if(!patch){showToast("⚠️ Bitte Jungschützen oder Ehrengarden wählen");return;}
-    const hs=document.getElementById("hatSakko").checked, hh=document.getElementById("hatHosen").checked;
-    if(!hs&&!hh){showToast("⚠️ Bitte Sakko oder Hose auswählen");return;}
-    let teile=[];
-    if(hs){
-      const sg=document.getElementById("fSakkoGroesse").value.trim(), sp=document.getElementById("fSakkoPreis").value;
-      if(!sg||!sp){showToast("⚠️ Sakko: Größe und Preis pflicht");return;}
-      teile.push(`Sakko Gr. ${sg}`); extra.sakko={groesse:sg,preis:Number(sp)};
+  const filtered = alleInserate.filter(i => {
+    if (nv && i.verkauft) return false;
+    if (aktiverTab !== "alle" && i.art !== aktiverTab) return false;
+    if (sakkoF) {
+      const g = (i.sakko?.groesse || i.blazer?.groesse || "").trim();
+      if (g !== sakkoF) return false;
     }
-    let hosen=[];
-    if(hh){
-      document.querySelectorAll("[id^='hose-']").forEach(z=>{
-        const n=z.id.split("-")[1], g=document.getElementById(`hoseG-${n}`)?.value.trim(), p=document.getElementById(`hoseP-${n}`)?.value;
-        if(g) hosen.push({groesse:g,preis:p?Number(p):0});
-      });
-      if(!hosen.length){showToast("⚠️ Mindestens eine Hose mit Größe angeben");return;}
-      teile.push(`${hosen.length} Hose${hosen.length>1?"n":""}`); extra.hosen=hosen;
+    if (hoseF) {
+      const alle = [...(i.hosen||[]), ...(i.damenHosen||[])];
+      if (!alle.some(h => h.groesse?.trim() === hoseF)) return false;
     }
-    titel=`[${patch}] ${teile.join(" + ")}`;
-    groesse=extra.sakko?.groesse||hosen[0]?.groesse||"";
-    preis=extra.sakko?.preis||hosen[0]?.preis||0;
-    extra.patch=patch;
-
-  } else {
-    const patch=document.querySelector('input[name="dPatch"]:checked')?.value;
-    if(!patch){showToast("⚠️ Bitte Jungschützen oder Ehrengarden wählen");return;}
-    const hb=document.getElementById("dHatBlazer").checked, ht=document.getElementById("dHatTuch").checked, hh=document.getElementById("dHatHosen").checked;
-    if(!hb&&!ht&&!hh){showToast("⚠️ Bitte mindestens ein Teil auswählen");return;}
-    let teile=[];
-    if(hb){
-      const bg=document.getElementById("fBlazerGroesse").value.trim(), bp=document.getElementById("fBlazerPreis").value;
-      if(!bg||!bp){showToast("⚠️ Blazer: Größe und Preis pflicht");return;}
-      teile.push(`Blazer Gr. ${bg}`); extra.blazer={groesse:bg,preis:Number(bp)};
-    }
-    if(ht){
-      const tp=document.getElementById("fTuchPreis").value;
-      teile.push("Grünes Tuch"); extra.tuch={preis:tp?Number(tp):0};
-    }
-    let dHosen=[];
-    if(hh){
-      document.querySelectorAll("[id^='dhose-']").forEach(z=>{
-        const n=z.id.split("-")[1], g=document.getElementById(`dhoseG-${n}`)?.value.trim(), p=document.getElementById(`dhoseP-${n}`)?.value;
-        if(g) dHosen.push({groesse:g,preis:p?Number(p):0});
-      });
-      if(!dHosen.length){showToast("⚠️ Mindestens eine Hose mit Größe angeben");return;}
-      teile.push(`${dHosen.length} Hose${dHosen.length>1?"n":""}`); extra.damenHosen=dHosen;
-    }
-    titel=`[${patch}] ${teile.join(" + ")}`;
-    groesse=extra.blazer?.groesse||dHosen[0]?.groesse||"";
-    preis=extra.blazer?.preis||dHosen[0]?.preis||extra.tuch?.preis||0;
-    extra.patch=patch;
-  }
-
-  if(!name||!tel){showToast("⚠️ Name und Telefonnummer pflicht");return;}
-  if(!fotoFiles.length){showToast("⚠️ Bitte mindestens ein Foto");return;}
-
-  const btn=document.getElementById("submitBtn");
-  submitLaeuft=true; btn.disabled=true; btn.innerHTML='<span class="spinner"></span> Fotos werden hochgeladen…';
-  try{
-    const urls=[];
-    for(const f of fotoFiles) urls.push(await uploadZuCloudinary(f));
-    btn.innerHTML='<span class="spinner"></span> Wird gespeichert…';
-    const res=await fetch("/.netlify/functions/inserat-speichern",{method:"POST",body:JSON.stringify({passwort:sessionPasswort,titel,kategorie:formKategorie,groesse,preis,zustand,beschreibung:beschr,name,telefon:tel,fotos:urls,...extra})});
-    if(!res.ok) throw new Error("Serverfehler");
-    showToast("✅ Inserat veröffentlicht!"); closeModal(); resetForm(); await ladeDaten();
-  }catch(e){showToast("❌ "+e.message);}
-  finally{submitLaeuft=false;btn.disabled=false;btn.innerHTML="Inserat veröffentlichen";}
-}
-
-// ── Render ──
-function renderInserate(){
-  const sakkoF=document.getElementById("filterSakko").value;
-  const hoseF =document.getElementById("filterHose").value;
-  const nv    =document.getElementById("filterVerfuegbar").checked;
-
-  const filtered=alleInserate.filter(i=>{
-    if(nv&&i.verkauft) return false;
-    if(aktiverTab!=="alle"&&i.kategorie!==aktiverTab) return false;
-    if(sakkoF){
-      const sg=i.sakko?.groesse||i.blazer?.groesse||"";
-      if(sg!==sakkoF) return false;
-    }
-    if(hoseF){
-      const alle=[...(i.hosen||[]),...(i.damenHosen||[])];
-      if(!alle.some(h=>h.groesse===hoseF)) return false;
-    }
+    if (patchF && i.patch !== patchF) return false;
     return true;
   });
 
-  document.getElementById("countBadge").textContent=`${filtered.length} Inserat${filtered.length!==1?"e":""}`;
-  const grid=document.getElementById("inserateGrid"), empty=document.getElementById("emptyState");
-  if(!filtered.length){grid.innerHTML="";empty.style.display="block";return;}
-  empty.style.display="none";
+  document.getElementById("countBadge").textContent = `${filtered.length} Inserat${filtered.length!==1?"e":""}`;
+  aktualisiereTabs();
 
-  grid.innerHTML=filtered.map(i=>{
-    const fotos=i.fotos||[], istDamen=i.kategorie==="damen";
-    let tags="";
-    if(i.patch) tags+=`<span class="tag tag-gold">${i.patch}</span>`;
-    if(i.sakko)  tags+=`<span class="tag tag-green">Sakko ${i.sakko.groesse}</span>`;
-    if(i.blazer) tags+=`<span class="tag tag-green">Blazer ${i.blazer.groesse}</span>`;
-    if(i.tuch)   tags+=`<span class="tag">Grünes Tuch</span>`;
-    [...(i.hosen||[]),...(i.damenHosen||[])].forEach(h=>{ tags+=`<span class="tag">Hose ${h.groesse}</span>`; });
-    tags+=`<span class="tag">${i.zustand}</span>`;
+  const grid  = document.getElementById("inserateGrid");
+  const empty = document.getElementById("emptyState");
+  if (!filtered.length) { grid.innerHTML = ""; empty.style.display = "block"; return; }
+  empty.style.display = "none";
 
-    // Preis
-    let preisTeile=[];
-    if(i.sakko)  preisTeile.push({label:`Sakko`,preis:i.sakko.preis});
-    if(i.blazer) preisTeile.push({label:`Blazer`,preis:i.blazer.preis});
-    if(i.tuch&&i.tuch.preis>0) preisTeile.push({label:"Tuch",preis:i.tuch.preis});
-    [...(i.hosen||[]),...(i.damenHosen||[])].forEach(h=>{ preisTeile.push({label:`Hose ${h.groesse}`,preis:h.preis}); });
-    if(!preisTeile.length) preisTeile.push({label:"",preis:i.preis||0});
+  grid.innerHTML = filtered.map(i => karteHTML(i)).join("");
+}
 
-    const gesamtPreis=preisTeile.reduce((s,t)=>s+t.preis,0);
-    let preisHtml=`<div class="card-price">${fmt(gesamtPreis)} €</div>`;
-    if(preisTeile.length>1){
-      preisHtml+=`<div style="font-size:.73rem;color:var(--muted)">${preisTeile.map(t=>`${t.label} ${fmt(t.preis)}€`).join(" · ")}</div>`;
+function karteHTML(i) {
+  const fotos    = i.fotos || [];
+  const istDamen = i.art === "damen";
+
+  // ── Titel & Subtitle
+  let haupttitel = "";
+  let subtitel   = "";
+
+  if (!istDamen) {
+    // Herren
+    const teile = [];
+    if (i.sakko)        teile.push(`Sakko Gr. ${i.sakko.groesse}`);
+    if (i.hosen?.length) {
+      if (i.hosen.length === 1) {
+        subtitel = `Hose Gr. ${i.hosen[0].groesse}`;
+      } else {
+        subtitel = `${i.hosen.length} Hosen (${i.hosen.map(h=>h.groesse).join(", ")})`;
+      }
+      teile.push(i.hosen.length === 1 ? "1 Hose" : `${i.hosen.length} Hosen`);
     }
+    haupttitel = `[${i.patch}] ${teile.join(" + ")}`;
+  } else {
+    // Damen
+    const teile = [];
+    if (i.blazer)           teile.push(`Blazer Gr. ${i.blazer.groesse}`);
+    if (i.tuch)             teile.push("Grünes Tuch");
+    if (i.damenHosen?.length) {
+      if (i.damenHosen.length === 1) {
+        subtitel = `Hose Gr. ${i.damenHosen[0].groesse}`;
+      } else {
+        subtitel = `${i.damenHosen.length} Hosen (${i.damenHosen.map(h=>h.groesse).join(", ")})`;
+      }
+      teile.push(i.damenHosen.length === 1 ? "1 Hose" : `${i.damenHosen.length} Hosen`);
+    }
+    haupttitel = `[${i.patch}] ${teile.join(" + ")}`;
+  }
 
-    return `<div class="card ${i.verkauft?"verkauft":""}">
-      <div class="card-stripe ${istDamen?"card-stripe-damen":"card-stripe-herren"}"></div>
-      <div class="card-img" onclick="openViewer(${JSON.stringify(fotos)},0)">
-        ${fotos.length?`<img src="${fotos[0]}" alt="${i.titel}" loading="lazy"/>`:"📷"}
-        <div class="kat-label ${istDamen?"kat-label-damen":"kat-label-herren"}">${istDamen?"Damen":"Herren"}</div>
-        ${i.verkauft?'<div class="verkauft-badge">Verkauft</div>':""}
-        ${fotos.length>1?`<div class="img-counter">1 / ${fotos.length}</div>`:""}
+  // ── Tags
+  let tags = `<span class="tag">${i.zustand}</span>`;
+  if (i.sakko)  tags += `<span class="tag tag-green">Sakko ${i.sakko.groesse}</span>`;
+  if (i.blazer) tags += `<span class="tag tag-green">Blazer ${i.blazer.groesse}</span>`;
+  if (i.tuch)   tags += `<span class="tag">Grünes Tuch</span>`;
+  [...(i.hosen||[]), ...(i.damenHosen||[])].forEach(h => { tags += `<span class="tag">Hose ${h.groesse}</span>`; });
+
+  // ── Preisliste
+  let preisZeilen = [];
+  if (i.sakko)  preisZeilen.push({ label:"Sakko",       preis:i.sakko.preis });
+  if (i.blazer) preisZeilen.push({ label:"Blazer",      preis:i.blazer.preis });
+  if (i.tuch)   preisZeilen.push({ label:"Grünes Tuch", preis:i.tuch.preis });
+  [...(i.hosen||[])].forEach(h       => preisZeilen.push({ label:`Hose ${h.groesse}`, preis:h.preis }));
+  [...(i.damenHosen||[])].forEach(h  => preisZeilen.push({ label:`Hose ${h.groesse}`, preis:h.preis }));
+  if (!preisZeilen.length) preisZeilen.push({ label:"Preis", preis:0 });
+
+  const gesamt = preisZeilen.reduce((s,z)=>s+z.preis, 0);
+  const preisHTML = `<div class="preisliste">
+    ${preisZeilen.map(z=>`<div class="preis-zeile"><span>${z.label}</span><span class="preis-val">${fmt(z.preis)} €</span></div>`).join("")}
+    ${preisZeilen.length > 1 ? `<div class="preis-zeile summe"><span>Gesamt</span><span class="preis-val">${fmt(gesamt)} €</span></div>` : ""}
+  </div>`;
+
+  return `<div class="card ${i.verkauft?"verkauft":""}">
+    <div class="card-stripe ${istDamen?"stripe-damen":"stripe-herren"}"></div>
+    <div class="card-img" onclick="openViewer(${JSON.stringify(fotos)},0)">
+      ${fotos.length ? `<img src="${fotos[0]}" alt="" loading="lazy"/>` : "📷"}
+      <div class="kat-label ${istDamen?"kat-damen":"kat-herren"}">${istDamen?"Damen":"Herren"}</div>
+      ${i.verkauft ? '<div class="verkauft-badge">Verkauft</div>' : ""}
+      ${fotos.length>1 ? `<div class="img-counter">1 / ${fotos.length}</div>` : ""}
+    </div>
+    <div class="card-body">
+      <div class="card-title">${haupttitel}</div>
+      ${subtitel ? `<div class="card-subtitle">↳ ${subtitel}</div>` : ""}
+      <div class="card-meta">${tags}</div>
+      ${i.beschreibung ? `<div class="card-desc">${i.beschreibung}</div>` : ""}
+      ${preisHTML}
+    </div>
+    <div class="card-footer">
+      <div class="kontakt-bereich" id="kontakt-${i.id}">
+        <button class="whatsapp-btn" onclick="kontaktieren('${i.id}','${esc(i.name)}','${esc(haupttitel)}')">
+          ${waIcon()} Kontaktieren
+        </button>
+        <small style="color:var(--muted);font-size:.75rem">${i.name}</small>
       </div>
-      <div class="card-body">
-        <div class="card-title">${i.titel}</div>
-        <div class="card-meta">${tags}</div>
-        ${i.beschreibung?`<div class="card-desc">${i.beschreibung}</div>`:""}
-        ${preisHtml}
+      <div class="admin-actions">
+        ${!i.verkauft ? `<button class="btn btn-sm btn-red" onclick="markVerkauft('${i.id}')">Verkauft</button>` : ""}
+        <button class="btn btn-sm btn-dark" onclick="loescheInserat('${i.id}')">🗑</button>
       </div>
-      <div class="card-footer">
-        <div class="kontakt-bereich" id="kontakt-${i.id}">
-          <button class="whatsapp-btn" onclick="kontaktieren('${i.id}','${esc(i.name)}','${esc(i.titel)}')">
-            ${waIcon()} Kontaktieren
-          </button>
-          <small style="color:var(--muted);font-size:.75rem">${i.name}</small>
+    </div>
+  </div>`;
+}
+
+// ════════════════════════════════════════════
+// MODAL – FORMULAR
+// ════════════════════════════════════════════
+function openModal() {
+  rendereFormular();
+  document.getElementById("modalBackdrop").classList.add("open");
+}
+function closeModal() { document.getElementById("modalBackdrop").classList.remove("open"); }
+function closeOnBackdrop(e) { if (e.target === e.currentTarget) closeModal(); }
+
+function rendereFormular() {
+  hosenZ = 0; dHosenZ = 0;
+  fotoFiles = []; fotoUrls = [];
+  formArt = "herren";
+  document.getElementById("modalInhalt").innerHTML = formularHTML();
+  // erste Hosen-Zeilen
+  hoseHinzufuegen("hosenListe", "hoseZ");
+  damenHoseHinzufuegen("damenHosenListe", "dHosenZ");
+}
+
+function formularHTML() {
+  return `
+    <div class="modal-header">
+      <h2>Inserat aufgeben</h2>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="formBody">
+      <div class="field">
+        <label>Kategorie *</label>
+        <div class="form-tabs">
+          <button type="button" class="form-tab ftab-herren" id="ftHerren" onclick="wechselFormArt('herren')">👔 Herren</button>
+          <button type="button" class="form-tab" id="ftDamen" onclick="wechselFormArt('damen')">👗 Damen</button>
         </div>
-        <div class="admin-actions">
-          ${!i.verkauft?`<button class="btn btn-sm btn-red" onclick="markVerkauft('${i.id}')">Verkauft</button>`:""}
-          <button class="btn btn-sm btn-loeschen" onclick="loescheInserat('${i.id}')">🗑</button>
+      </div>
+
+      <!-- HERREN -->
+      <div id="herrenF">
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div class="sec">Jungschützen / Ehrengarde *</div>
+          <div class="field"><div class="radio-group">
+            <label class="radio-label"><input type="radio" name="hPatch" value="Jungschützen"/> Jungschützen</label>
+            <label class="radio-label"><input type="radio" name="hPatch" value="Ehrengarde"/> Ehrengarde</label>
+          </div></div>
+          <div class="sec">Sakko</div>
+          <label class="chk-label"><input type="checkbox" id="hatSakko" onchange="tog('sakkoF','hatSakko')" checked/><span>Sakko vorhanden</span></label>
+          <div id="sakkoF">
+            <div class="field-row">
+              <div class="field"><label>Sakko-Größe *</label><input type="text" id="fSakkoGr" placeholder="z.B. 48, M, 50 kurz…"/></div>
+              <div class="field"><label>Preis (€) *</label><input type="number" id="fSakkoPr" placeholder="80" min="0"/></div>
+            </div>
+          </div>
+          <div class="sec">Hosen</div>
+          <label class="chk-label"><input type="checkbox" id="hatHosen" onchange="tog('hosenF','hatHosen')"/><span>Hose(n) vorhanden</span></label>
+          <div id="hosenF" style="display:none">
+            <div class="hose-block" id="hosenListe"></div>
+            <button type="button" class="hose-add" onclick="hoseHinzufuegen('hosenListe','hoseZ')" style="margin-top:.5rem">＋ Weitere Hose</button>
+          </div>
         </div>
+      </div>
+
+      <!-- DAMEN -->
+      <div id="damenF" style="display:none">
+        <div style="display:flex;flex-direction:column;gap:1rem">
+          <div class="sec">Jungschützen / Ehrengarde *</div>
+          <div class="field"><div class="radio-group">
+            <label class="radio-label"><input type="radio" name="dPatch" value="Jungschützen"/> Jungschützen</label>
+            <label class="radio-label"><input type="radio" name="dPatch" value="Ehrengarde"/> Ehrengarde</label>
+          </div></div>
+          <div class="sec">Blazer</div>
+          <label class="chk-label"><input type="checkbox" id="dHatBlazer" onchange="tog('blazerF','dHatBlazer')" checked/><span>Blazer vorhanden</span></label>
+          <div id="blazerF">
+            <div class="field-row">
+              <div class="field"><label>Blazer-Größe *</label><input type="text" id="fBlazerGr" placeholder="z.B. 36, S, 38…"/></div>
+              <div class="field"><label>Preis (€) *</label><input type="number" id="fBlazerPr" placeholder="80" min="0"/></div>
+            </div>
+          </div>
+          <div class="sec">Grünes Tuch</div>
+          <label class="chk-label"><input type="checkbox" id="dHatTuch" onchange="tog('tuchF','dHatTuch')"/><span>Grünes Tuch vorhanden</span></label>
+          <div id="tuchF" style="display:none">
+            <div class="field" style="max-width:200px">
+              <label>Preis Tuch (€) *</label>
+              <input type="number" id="fTuchPr" placeholder="15" min="0"/>
+            </div>
+          </div>
+          <div class="sec">Hosen</div>
+          <label class="chk-label"><input type="checkbox" id="dHatHosen" onchange="tog('dHosenF','dHatHosen')"/><span>Hose(n) vorhanden</span></label>
+          <div id="dHosenF" style="display:none">
+            <div class="hose-block" id="damenHosenListe"></div>
+            <button type="button" class="hose-add" onclick="damenHoseHinzufuegen('damenHosenListe','dHosenZ')" style="margin-top:.5rem">＋ Weitere Hose</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GEMEINSAM -->
+      <div class="sec">Allgemein</div>
+      <div class="field">
+        <label>Zustand *</label>
+        <select id="fZustand">
+          <option>Neu</option>
+          <option>Sehr gut</option>
+          <option>Gut</option>
+          <option>Zufriedenstellend</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Beschreibung</label>
+        <textarea id="fBeschr" placeholder="Passform-Hinweise, Besonderheiten…"></textarea>
+      </div>
+      <div class="field">
+        <label>Fotos * <span class="hint">(max. 10)</span></label>
+        <div class="upload-area" id="uploadArea" onclick="fotoKlick()"
+             ondragover="event.preventDefault();this.classList.add('drag')"
+             ondragleave="this.classList.remove('drag')"
+             ondrop="handleDrop(event)">
+          <input type="file" id="fotoInput" multiple accept="image/*" onchange="handleFiles(this.files)"/>
+          📷 Klicken oder Fotos hierher ziehen<br/>
+          <small style="color:var(--muted)">JPG, PNG – bis zu 10 Fotos</small>
+        </div>
+        <div class="upload-previews" id="uploadPreviews"></div>
+      </div>
+      <div class="sec">Kontakt</div>
+      <div class="field-row">
+        <div class="field"><label>Name *</label><input type="text" id="fName" placeholder="Vorname Nachname"/></div>
+        <div class="field">
+          <label>WhatsApp-Nummer *</label>
+          <input type="tel" id="fTel" placeholder="+49 151 12345678"/>
+          <span class="hint">Nur für eingeloggte Mitglieder sichtbar</span>
+        </div>
+      </div>
+      <button class="btn btn-gold" onclick="zeigeBestaetigung()" style="width:100%;padding:.75rem;font-size:1rem;justify-content:center">
+        Weiter → Bestätigung
+      </button>
+    </div>`;
+}
+
+// ── Formular Art-Wechsel ──
+function wechselFormArt(art) {
+  formArt = art;
+  document.getElementById("ftHerren").className = "form-tab" + (art==="herren" ? " ftab-herren" : "");
+  document.getElementById("ftDamen").className  = "form-tab" + (art==="damen"  ? " ftab-damen"  : "");
+  document.getElementById("herrenF").style.display = art==="herren" ? "" : "none";
+  document.getElementById("damenF").style.display  = art==="damen"  ? "" : "none";
+}
+
+function tog(feldId, cbId) {
+  document.getElementById(feldId).style.display = document.getElementById(cbId).checked ? "" : "none";
+}
+
+// ── Hosen ──
+function hoseHinzufuegen(listeId, zaehlerKey) {
+  const id  = ++hosenZ;
+  const div = document.createElement("div");
+  div.className = "hose-zeile"; div.id = `h-${id}`;
+  div.innerHTML = `<input type="text" placeholder="Größe (z.B. W32/L32, 48…)" id="hG-${id}"/><input type="number" placeholder="Preis €" id="hP-${id}" min="0" style="width:90px"/><button type="button" class="hose-del" onclick="document.getElementById('h-${id}').remove()">✕</button>`;
+  document.getElementById(listeId).appendChild(div);
+}
+function damenHoseHinzufuegen(listeId, zaehlerKey) {
+  const id  = ++dHosenZ;
+  const div = document.createElement("div");
+  div.className = "hose-zeile"; div.id = `dh-${id}`;
+  div.innerHTML = `<input type="text" placeholder="Größe (z.B. W30/L30, 38…)" id="dhG-${id}"/><input type="number" placeholder="Preis €" id="dhP-${id}" min="0" style="width:90px"/><button type="button" class="hose-del" onclick="document.getElementById('dh-${id}').remove()">✕</button>`;
+  document.getElementById(listeId).appendChild(div);
+}
+
+// ── Fotos ──
+function fotoKlick() { if(fotoFiles.length>=MAX_FOTOS){showToast(`⚠️ Maximal ${MAX_FOTOS} Fotos`);return;} document.getElementById("fotoInput").click(); }
+function handleFiles(files) {
+  const rest = MAX_FOTOS-fotoFiles.length, auswahl = Array.from(files).slice(0,rest);
+  if (files.length>rest) showToast(`⚠️ Nur ${rest} weitere Foto(s) möglich`);
+  for (const f of auswahl) { fotoFiles.push(f); fotoUrls.push(URL.createObjectURL(f)); }
+  document.getElementById("fotoInput").value = "";
+  renderPreviews();
+}
+function handleDrop(e) { e.preventDefault(); document.getElementById("uploadArea").classList.remove("drag"); handleFiles(e.dataTransfer.files); }
+function renderPreviews() {
+  document.getElementById("uploadPreviews").innerHTML = fotoUrls.map((u,i)=>`<div class="preview-wrap"><img class="preview-thumb" src="${u}"/><button onclick="removeFoto(${i})">✕</button></div>`).join("");
+  document.getElementById("uploadArea").style.opacity = fotoFiles.length>=MAX_FOTOS?".5":"1";
+}
+function removeFoto(idx) { URL.revokeObjectURL(fotoUrls[idx]); fotoFiles.splice(idx,1); fotoUrls.splice(idx,1); renderPreviews(); }
+
+// ════════════════════════════════════════════
+// BESTÄTIGUNG
+// ════════════════════════════════════════════
+function zeigeBestaetigung() {
+  // Daten sammeln & validieren
+  const name  = document.getElementById("fName")?.value.trim();
+  const tel   = document.getElementById("fTel")?.value.trim();
+  const zust  = document.getElementById("fZustand")?.value;
+  const besch = document.getElementById("fBeschr")?.value.trim();
+
+  let daten = { art: formArt, zustand: zust, beschreibung: besch, name, telefon: tel };
+
+  if (formArt === "herren") {
+    const patch = document.querySelector('input[name="hPatch"]:checked')?.value;
+    if (!patch) { showToast("⚠️ Bitte Jungschützen oder Ehrengarde wählen"); return; }
+    const hs = document.getElementById("hatSakko").checked;
+    const hh = document.getElementById("hatHosen").checked;
+    if (!hs && !hh) { showToast("⚠️ Bitte Sakko oder Hose auswählen"); return; }
+    daten.patch = patch;
+    if (hs) {
+      const gr = document.getElementById("fSakkoGr").value.trim(), pr = document.getElementById("fSakkoPr").value;
+      if (!gr||!pr) { showToast("⚠️ Sakko: Größe und Preis pflicht"); return; }
+      daten.sakko = { groesse: gr, preis: Number(pr) };
+    }
+    if (hh) {
+      const hosen = [];
+      document.querySelectorAll("[id^='h-']").forEach(z => {
+        const n = z.id.split("-")[1], g = document.getElementById(`hG-${n}`)?.value.trim(), p = document.getElementById(`hP-${n}`)?.value;
+        if (g) hosen.push({ groesse: g, preis: p ? Number(p) : 0 });
+      });
+      if (!hosen.length) { showToast("⚠️ Mindestens eine Hose mit Größe"); return; }
+      daten.hosen = hosen;
+    }
+  } else {
+    const patch = document.querySelector('input[name="dPatch"]:checked')?.value;
+    if (!patch) { showToast("⚠️ Bitte Jungschützen oder Ehrengarde wählen"); return; }
+    const hb = document.getElementById("dHatBlazer").checked;
+    const ht = document.getElementById("dHatTuch").checked;
+    const hh = document.getElementById("dHatHosen").checked;
+    if (!hb && !ht && !hh) { showToast("⚠️ Bitte mindestens ein Teil auswählen"); return; }
+    daten.patch = patch;
+    if (hb) {
+      const gr = document.getElementById("fBlazerGr").value.trim(), pr = document.getElementById("fBlazerPr").value;
+      if (!gr||!pr) { showToast("⚠️ Blazer: Größe und Preis pflicht"); return; }
+      daten.blazer = { groesse: gr, preis: Number(pr) };
+    }
+    if (ht) {
+      const pr = document.getElementById("fTuchPr").value;
+      if (!pr) { showToast("⚠️ Tuch: Preis pflicht"); return; }
+      daten.tuch = { preis: Number(pr) };
+    }
+    if (hh) {
+      const dHosen = [];
+      document.querySelectorAll("[id^='dh-']").forEach(z => {
+        const n = z.id.split("-")[1], g = document.getElementById(`dhG-${n}`)?.value.trim(), p = document.getElementById(`dhP-${n}`)?.value;
+        if (g) dHosen.push({ groesse: g, preis: p ? Number(p) : 0 });
+      });
+      if (!dHosen.length) { showToast("⚠️ Mindestens eine Hose mit Größe"); return; }
+      daten.damenHosen = dHosen;
+    }
+  }
+
+  if (!name||!tel) { showToast("⚠️ Name und Telefonnummer pflicht"); return; }
+  if (!fotoFiles.length) { showToast("⚠️ Bitte mindestens ein Foto"); return; }
+
+  pendingDaten = daten;
+
+  // Bestätigungsansicht
+  const zeilen = [];
+  zeilen.push({ l:"Kategorie", v: daten.art==="herren"?"Herren 👔":"Damen 👗" });
+  zeilen.push({ l:"Typ",       v: daten.patch });
+  zeilen.push({ l:"Zustand",   v: daten.zustand });
+  if (daten.sakko)  zeilen.push({ l:"Sakko",       v:`${daten.sakko.groesse} – ${fmt(daten.sakko.preis)} €` });
+  if (daten.blazer) zeilen.push({ l:"Blazer",       v:`${daten.blazer.groesse} – ${fmt(daten.blazer.preis)} €` });
+  if (daten.tuch)   zeilen.push({ l:"Grünes Tuch",  v:`${fmt(daten.tuch.preis)} €` });
+  (daten.hosen||[]).forEach((h,idx)    => zeilen.push({ l:`Hose ${idx+1}`, v:`${h.groesse} – ${fmt(h.preis)} €` }));
+  (daten.damenHosen||[]).forEach((h,idx)=> zeilen.push({ l:`Hose ${idx+1}`, v:`${h.groesse} – ${fmt(h.preis)} €` }));
+  if (daten.beschreibung) zeilen.push({ l:"Beschreibung", v: daten.beschreibung });
+  zeilen.push({ l:"Name",    v: daten.name });
+  zeilen.push({ l:"Fotos",   v: `${fotoFiles.length} Foto(s)` });
+
+  document.getElementById("modalInhalt").innerHTML = `
+    <div class="modal-header">
+      <h2>Bestätigung</h2>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="confirm-box">
+        <h3>Bitte prüfe dein Inserat:</h3>
+        ${zeilen.map(z=>`<div class="confirm-row"><span class="confirm-label">${z.l}</span><span>${z.v}</span></div>`).join("")}
+        <div class="confirm-fotos">${fotoUrls.map(u=>`<img class="confirm-thumb" src="${u}"/>`).join("")}</div>
+      </div>
+      <div class="confirm-actions">
+        <button class="btn btn-outline" onclick="rendereFormularMitDaten()">← Zurück</button>
+        <button class="btn btn-gold" id="submitBtn" onclick="submitInserat()">✓ Jetzt veröffentlichen</button>
       </div>
     </div>`;
-  }).join("");
 }
 
-function fmt(n){return Number(n).toFixed(2).replace(".",",");}
-function esc(s){return(s||"").replace(/'/g,"\\'");}
-
-async function kontaktieren(id,name,titel){
-  const b=document.getElementById(`kontakt-${id}`); b.innerHTML='<span class="spinner spinner-dark"></span>';
-  try{
-    const res=await fetch("/.netlify/functions/telefon-abrufen",{method:"POST",body:JSON.stringify({passwort:sessionPasswort,id})});
-    const d=await res.json(); if(!d.telefon) throw new Error();
-    const link=`https://wa.me/${d.telefon.replace(/\D/g,"")}?text=${encodeURIComponent(`Hallo ${name}, ich interessiere mich für dein Inserat: ${titel}`)}`;
-    b.innerHTML=`<a class="whatsapp-btn" href="${link}" target="_blank" rel="noopener">${waIcon()} WhatsApp öffnen</a><small style="color:var(--muted);font-size:.75rem">${name}</small>`;
-  }catch{b.innerHTML=`<span style="color:var(--red);font-size:.8rem">Fehler – bitte nochmal versuchen</span>`;}
+function rendereFormularMitDaten() {
+  // Formular neu aufbauen und Daten wiederherstellen
+  rendereFormular();
+  if (!pendingDaten) return;
+  const d = pendingDaten;
+  // Art setzen
+  wechselFormArt(d.art);
+  setTimeout(() => {
+    if (d.art === "herren") {
+      if (d.patch) { const r=document.querySelector(`input[name="hPatch"][value="${d.patch}"]`); if(r) r.checked=true; }
+      if (d.sakko)  { document.getElementById("hatSakko").checked=true;  tog("sakkoF","hatSakko"); document.getElementById("fSakkoGr").value=d.sakko.groesse; document.getElementById("fSakkoPr").value=d.sakko.preis; }
+      if (d.hosen?.length) { document.getElementById("hatHosen").checked=true; tog("hosenF","hatHosen"); document.getElementById("hosenListe").innerHTML=""; hosenZ=0; d.hosen.forEach(h=>{hoseHinzufuegen("hosenListe","hoseZ");document.getElementById(`hG-${hosenZ}`).value=h.groesse;document.getElementById(`hP-${hosenZ}`).value=h.preis;}); }
+    } else {
+      if (d.patch) { const r=document.querySelector(`input[name="dPatch"][value="${d.patch}"]`); if(r) r.checked=true; }
+      if (d.blazer) { document.getElementById("dHatBlazer").checked=true; tog("blazerF","dHatBlazer"); document.getElementById("fBlazerGr").value=d.blazer.groesse; document.getElementById("fBlazerPr").value=d.blazer.preis; }
+      if (d.tuch)   { document.getElementById("dHatTuch").checked=true; tog("tuchF","dHatTuch"); document.getElementById("fTuchPr").value=d.tuch.preis; }
+      if (d.damenHosen?.length) { document.getElementById("dHatHosen").checked=true; tog("dHosenF","dHatHosen"); document.getElementById("damenHosenListe").innerHTML=""; dHosenZ=0; d.damenHosen.forEach(h=>{damenHoseHinzufuegen("damenHosenListe","dHosenZ");document.getElementById(`dhG-${dHosenZ}`).value=h.groesse;document.getElementById(`dhP-${dHosenZ}`).value=h.preis;}); }
+    }
+    if (d.zustand) document.getElementById("fZustand").value=d.zustand;
+    if (d.beschreibung) document.getElementById("fBeschr").value=d.beschreibung;
+    if (d.name)    document.getElementById("fName").value=d.name;
+    if (d.telefon) document.getElementById("fTel").value=d.telefon;
+    // Fotos wiederherstellen (Previews)
+    renderPreviews();
+  }, 50);
 }
 
-async function markVerkauft(id){
-  if(!confirm("Inserat als 'Verkauft' markieren?")) return;
-  try{await fetch("/.netlify/functions/inserat-verkauft",{method:"POST",body:JSON.stringify({passwort:sessionPasswort,id})});showToast("✅ Als verkauft markiert");await ladeDaten();}
-  catch(e){showToast("❌ "+e.message);}
+// ════════════════════════════════════════════
+// SUBMIT
+// ════════════════════════════════════════════
+async function uploadZuCloudinary(file) {
+  const cn = "dc3cgunve", cp = "ym6yy11s";
+  const fd = new FormData(); fd.append("file",file); fd.append("upload_preset",cp);
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${cn}/image/upload`,{method:"POST",body:fd});
+  const d = await res.json(); if (!d.secure_url) throw new Error("Upload fehlgeschlagen");
+  return d.secure_url;
 }
-async function loescheInserat(id){
-  if(!confirm("Inserat endgültig löschen inkl. aller Fotos?")) return;
-  try{
-    const res=await fetch("/.netlify/functions/inserat-loeschen",{method:"POST",body:JSON.stringify({passwort:sessionPasswort,id})});
-    if(!res.ok) throw new Error("Serverfehler");
+
+async function submitInserat() {
+  if (submitLaeuft) return;
+  const btn = document.getElementById("submitBtn");
+  submitLaeuft = true; btn.disabled = true; btn.innerHTML = '<span class="spinner"></span> Fotos hochladen…';
+
+  try {
+    const urls = [];
+    for (const f of fotoFiles) urls.push(await uploadZuCloudinary(f));
+    btn.innerHTML = '<span class="spinner"></span> Wird gespeichert…';
+
+    const payload = { passwort: sessionPw, ...pendingDaten, fotos: urls };
+    const res = await fetch("/.netlify/functions/inserat-speichern", { method:"POST", body:JSON.stringify(payload) });
+    if (!res.ok) throw new Error("Serverfehler");
+
+    showToast("✅ Inserat veröffentlicht!");
+    closeModal();
+    pendingDaten = null;
+    fotoFiles.forEach((_,i) => URL.revokeObjectURL(fotoUrls[i]));
+    fotoFiles = []; fotoUrls = [];
+    await ladeDaten();
+  } catch(e) { showToast("❌ " + e.message); }
+  finally { submitLaeuft = false; if(btn) { btn.disabled=false; btn.innerHTML="✓ Jetzt veröffentlichen"; } }
+}
+
+// ════════════════════════════════════════════
+// KONTAKT / ADMIN
+// ════════════════════════════════════════════
+async function kontaktieren(id, name, titel) {
+  const b = document.getElementById(`kontakt-${id}`); b.innerHTML = '<span class="spinner spinner-dark"></span>';
+  try {
+    const res = await fetch("/.netlify/functions/telefon-abrufen",{method:"POST",body:JSON.stringify({passwort:sessionPw,id})});
+    const d = await res.json(); if (!d.telefon) throw new Error();
+    const link = `https://wa.me/${d.telefon.replace(/\D/g,"")}?text=${encodeURIComponent(`Hallo ${name}, ich interessiere mich für dein Inserat: ${titel}`)}`;
+    b.innerHTML = `<a class="whatsapp-btn" href="${link}" target="_blank" rel="noopener">${waIcon()} WhatsApp öffnen</a><small style="color:var(--muted);font-size:.75rem">${name}</small>`;
+  } catch { b.innerHTML = `<span style="color:var(--red);font-size:.8rem">Fehler – bitte nochmal versuchen</span>`; }
+}
+
+async function markVerkauft(id) {
+  if (!confirm("Inserat als 'Verkauft' markieren?")) return;
+  try { await fetch("/.netlify/functions/inserat-verkauft",{method:"POST",body:JSON.stringify({passwort:sessionPw,id})}); showToast("✅ Als verkauft markiert"); await ladeDaten(); }
+  catch(e) { showToast("❌ "+e.message); }
+}
+async function loescheInserat(id) {
+  if (!confirm("Inserat endgültig löschen inkl. aller Fotos?")) return;
+  try {
+    const res = await fetch("/.netlify/functions/inserat-loeschen",{method:"POST",body:JSON.stringify({passwort:sessionPw,id})});
+    if (!res.ok) throw new Error("Serverfehler");
     showToast("🗑 Inserat und Fotos gelöscht"); await ladeDaten();
-  }catch(e){showToast("❌ "+e.message);}
+  } catch(e) { showToast("❌ "+e.message); }
 }
 
-function openModal(){document.getElementById("modalBackdrop").classList.add("open");}
-function closeModal(){document.getElementById("modalBackdrop").classList.remove("open");}
-function closeOnBackdrop(e){if(e.target===e.currentTarget)closeModal();}
-function resetForm(){
-  ["fSakkoGroesse","fSakkoPreis","fBlazerGroesse","fBlazerPreis","fTuchPreis","fBeschreibung","fName","fTelefon"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
-  document.getElementById("fZustand").selectedIndex=0;
-  document.getElementById("hatSakko").checked=true;  toggleSakko();
-  document.getElementById("hatHosen").checked=false; toggleHosen();
-  document.getElementById("dHatBlazer").checked=true;  toggleBlazer();
-  document.getElementById("dHatTuch").checked=false;   toggleTuch();
-  document.getElementById("dHatHosen").checked=false;  toggleDamenHosen();
-  document.querySelectorAll('input[name="hPatch"], input[name="dPatch"]').forEach(r=>r.checked=false);
-  document.getElementById("hosenListe").innerHTML=""; hosenZaehler=0; hoseHinzufuegen();
-  document.getElementById("damenHosenListe").innerHTML=""; dHosenZaehler=0; damenHoseHinzufuegen();
-  fotoFiles.forEach((_,i)=>URL.revokeObjectURL(fotoUrls[i])); fotoFiles=[]; fotoUrls=[];
-  document.getElementById("uploadPreviews").innerHTML=""; document.getElementById("uploadArea").style.opacity="1";
-  wechselFormTab("herren");
-}
+// ════════════════════════════════════════════
+// FOTO VIEWER
+// ════════════════════════════════════════════
+function openViewer(fotos,idx) { if(!fotos.length)return; viewerPhotos=fotos; viewerIdx=idx; document.getElementById("viewerImg").src=fotos[idx]; document.getElementById("photoViewer").classList.add("open"); }
+function closeViewer() { document.getElementById("photoViewer").classList.remove("open"); }
+function viewerNav(dir) { viewerIdx=(viewerIdx+dir+viewerPhotos.length)%viewerPhotos.length; document.getElementById("viewerImg").src=viewerPhotos[viewerIdx]; }
+document.getElementById("photoViewer").addEventListener("click",e=>{ if(e.target===e.currentTarget) closeViewer(); });
 
-function openViewer(fotos,idx){if(!fotos.length)return;viewerPhotos=fotos;viewerIdx=idx;document.getElementById("viewerImg").src=fotos[idx];document.getElementById("photoViewer").classList.add("open");}
-function closeViewer(){document.getElementById("photoViewer").classList.remove("open");}
-function viewerNav(dir){viewerIdx=(viewerIdx+dir+viewerPhotos.length)%viewerPhotos.length;document.getElementById("viewerImg").src=viewerPhotos[viewerIdx];}
-document.getElementById("photoViewer").addEventListener("click",e=>{if(e.target===e.currentTarget)closeViewer();});
-
-function waIcon(){return`<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.08L0 24l6.1-1.6A11.97 11.97 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.23-3.48-8.52ZM12 22a9.94 9.94 0 0 1-5.08-1.38l-.36-.22-3.76.99 1-3.65-.24-.38A9.95 9.95 0 0 1 2 12C2 6.49 6.49 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.94 9.94 0 0 1 22 12c0 5.51-4.49 10-10 10Zm5.44-7.47c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.07 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>`;}
-function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3200);}
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeViewer();}});
+// ════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════
+function fmt(n) { return Number(n||0).toFixed(2).replace(".",","); }
+function esc(s) { return (s||"").replace(/'/g,"\\'"); }
+function waIcon() { return `<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12a11.93 11.93 0 0 0 1.64 6.08L0 24l6.1-1.6A11.97 11.97 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.21-1.25-6.23-3.48-8.52ZM12 22a9.94 9.94 0 0 1-5.08-1.38l-.36-.22-3.76.99 1-3.65-.24-.38A9.95 9.95 0 0 1 2 12C2 6.49 6.49 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.94 9.94 0 0 1 22 12c0 5.51-4.49 10-10 10Zm5.44-7.47c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.79-1.68-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.19 5.07 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35Z"/></svg>`; }
+function showToast(msg) { const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),3200); }
+document.addEventListener("keydown", e => { if(e.key==="Escape"){ closeModal(); closeViewer(); } });
 </script>
-
-<meta name="cn" content="dc3cgunve" />
-<meta name="cp" content="ym6yy11s" />
 </body>
 </html>
